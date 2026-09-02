@@ -1,7 +1,7 @@
 {
   "name": "simply-black-and-white",
   "version": "1.0.0",
-  "description": "ADA Compliance, Digital Accessibility & AEO Consultancy Platform",
+  "description": "Web Accessibility, Digital Compliance & AEO Consultancy Platform",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
@@ -9,7 +9,7 @@
     "lint": "eslint src/**/*.js"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": "20.x"
   },
   "dependencies": {
     "axe-core": "4.9.1",
