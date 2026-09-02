@@ -1,0 +1,45 @@
+# Simply Black and White
+## Web Accessibility & AEO Consultancy
+
+> Simply Black and White provides web accessibility audits, digital accessibility remediation, and Answer Engine Optimization consultancy. We help businesses make their websites accessible to everyone — without the intimidation, the jargon, or the judgment.
+
+## What We Do
+
+- Web accessibility audits and compliance assessments
+- Digital accessibility remediation planning and developer-ready workbooks
+- Ongoing accessibility monitoring and re-scanning
+- Answer Engine Optimization (AEO) — structuring websites so AI search engines can read, understand, and recommend businesses
+- AEO health scoring and AI search visibility analysis
+
+## Our Services
+
+- The Clear View Audit: Comprehensive accessibility audit with a full scan report, plain-language fix recommendations, AEO citation readiness check, and prioritized developer checklist.
+- The Clean Slate Orchestration: Full architectural remediation planning with developer-ready workbooks, code-level fix specifications, and platform-specific guidance.
+- The Always Open Guardian: Continuous accessibility monitoring, recurring re-scans, AEO citation tracking, and quarterly compliance tune-ups.
+
+## Who We Help
+
+- Small and mid-size business owners who inherited inaccessible websites
+- Agencies and development teams needing accessibility guidance
+- Organizations preparing for DOJ Title II web accessibility compliance
+- Businesses wanting to improve their AI search engine visibility
+
+## Our Approach
+
+We position ourselves as a helpful ally rather than an intimidating auditor. We understand that most website accessibility issues stem from inherited templates, third-party plugins, and previous agencies — not intentional neglect. We provide clear, actionable remediation plans in plain language.
+
+## Key Facts
+
+- Website: https://simplyblackandwhite.com
+- Services: Web Accessibility, Digital Compliance, AEO Consultancy
+- Standards: WCAG AAA aligned, DOJ Title II ready
+- Free tool: Homepage accessibility scanner with instant results
+
+## Important Pages
+
+- Homepage: https://simplyblackandwhite.com/
+- Frequently Asked Questions: https://simplyblackandwhite.com/faq
+- AI-Readable Overview: https://simplyblackandwhite.com/ai
+- Accessibility Statement: https://simplyblackandwhite.com/accessibility
+- Terms of Service: https://simplyblackandwhite.com/terms
+- Privacy Policy: https://simplyblackandwhite.com/privacy

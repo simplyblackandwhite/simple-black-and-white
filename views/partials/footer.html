@@ -1,0 +1,78 @@
+<!-- ============================================================
+     Simply Black and White — Site Footer partial
+     Includes: brand, nav links, legal disclaimer, accessibility statement
+     ============================================================ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+
+    <div class="site-footer__grid">
+
+      <!-- Brand column -->
+      <div class="site-footer__brand">
+        <a href="/" class="site-logo" aria-label="Simply Black and White — Home">
+          Simply Black and White
+        </a>
+        <p class="site-footer__tagline">
+          Web Accessibility · Digital Compliance · AEO Consultancy
+        </p>
+        <p class="site-footer__tagline" style="margin-top: 0.75rem;">
+          We make the web open to everyone — no judgment, just results.
+        </p>
+      </div>
+
+      <!-- Services column -->
+      <nav aria-label="Services navigation">
+        <p class="site-footer__nav-heading">Services</p>
+        <ul class="site-footer__nav" role="list">
+          <li><a href="/#services">The Clear View Audit</a></li>
+          <li><a href="/#services">The Clean Slate Orchestration</a></li>
+          <li><a href="/#services">The Always Open Guardian</a></li>
+          <li><a href="/#scan">Free Site Scan</a></li>
+        </ul>
+      </nav>
+
+      <!-- Company column -->
+      <nav aria-label="Company navigation">
+        <p class="site-footer__nav-heading">Company</p>
+        <ul class="site-footer__nav" role="list">
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#why-accessibility">Why Accessibility</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Legal column -->
+      <nav aria-label="Legal navigation">
+        <p class="site-footer__nav-heading">Legal</p>
+        <ul class="site-footer__nav" role="list">
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/accessibility">Accessibility Statement</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="site-footer__bottom">
+      <p class="site-footer__legal">
+        <strong>Disclaimer:</strong> Simply Black and White provides expert risk mitigation,
+        code restructuring, and architectural guidance. We do not guarantee permanent 100%
+        compliance, as website code changes continuously through third-party plugins,
+        template updates, and client-uploaded content. Our services constitute professional
+        advisory and are not a substitute for ongoing compliance monitoring.
+      </p>
+      <p class="site-footer__copyright">
+        &copy; <span id="footer-year"></span> Simply Black and White. All rights reserved.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  // Dynamic copyright year
+  var el = document.getElementById('footer-year');
+  if (el) el.textContent = new Date().getFullYear();
+</script>

@@ -1,0 +1,35 @@
+[build]
+builder = "nixpacks"
+buildCommand = "npm install"
+
+[deploy]
+startCommand = "npm start"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+# ─── Health Check ────────────────────────────────────────────────────────────
+# Railway will ping this path to confirm the app is running
+[deploy.healthcheck]
+path = "/health"
+timeoutSecs = 30
+
+# ─── Environment ─────────────────────────────────────────────────────────────
+# Set these in the Railway dashboard under Variables:
+#   NODE_ENV=production
+#   PORT=3000 (Railway sets this automatically)
+#   SESSION_SECRET=<generate a strong random string>
+#   DB_PATH=/data/sbw.db          ← matches the volume mount below
+#   GOOGLE_CLIENT_ID=<from Google Cloud Console>
+#   GOOGLE_CLIENT_SECRET=<from Google Cloud Console>
+#   GOOGLE_CALLBACK_URL=https://simplyblackandwhite.com/auth/google/callback
+#   ALLOWED_GOOGLE_EMAIL=frictionlessaccess@gmail.com,icreate.com@gmail.com
+#   RESEND_API_KEY=<from resend.com/api-keys>
+#   NOTIFY_EMAIL_FROM=Simply Black and White <hello@simplyblackandwhite.com>
+#   NOTIFY_EMAIL_TO=frictionlessaccess@gmail.com
+#   APP_URL=https://simplyblackandwhite.com
+
+# ─── Persistent Volume ───────────────────────────────────────────────────────
+# In the Railway dashboard: add a Volume and mount it at /data
+# This ensures your SQLite database survives deploys and restarts.
+# Mount path: /data
+# The DB_PATH env var should be set to: /data/sbw.db

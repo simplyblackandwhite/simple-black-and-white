@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Nightwolf — Simply Black and White</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/scanner.css" />
+</head>
+<body class="dash-body">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ─── Dashboard Header ─────────────────────────────────── -->
+  <header class="dash-header" role="banner">
+    <div class="container dash-header__inner">
+      <a href="/scanner" class="dash-header__logo" aria-label="Nightwolf — Home">
+        Nightwolf
+        <span class="dash-header__logo-version" id="dash-version"></span>
+      </a>
+      <div class="dash-header__actions">
+        <a href="/scanner/fixer" class="btn btn--ghost btn--sm" style="color:var(--color-taupe);border-color:var(--color-taupe);">Fixer</a>
+        <span class="dash-header__user" id="dash-user"></span>
+        <form action="/auth/logout" method="POST" class="dash-header__logout-form">
+          <button type="submit" class="btn btn--ghost btn--sm">Logout</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── Main Content ─────────────────────────────────────── -->
+  <main id="main-content" class="dash-main">
+    <div class="container">
+
+      <!-- ═══ SCAN INPUT ═══════════════════════════════════════ -->
+      <section class="dash-scan-input" aria-labelledby="scan-input-heading">
+        <h1 class="sr-only" id="scan-input-heading">Scanner Dashboard</h1>
+        <div class="dash-scan-box">
+          <form class="dash-scan-form" id="dash-scan-form" novalidate>
+            <label for="dash-url" class="dash-scan-form__label">Scan a website</label>
+            <div class="dash-scan-form__row">
+              <input
+                type="url"
+                id="dash-url"
+                name="url"
+                class="dash-scan-form__input"
+                placeholder="https://clientwebsite.com"
+                autocomplete="url"
+                spellcheck="false"
+                aria-required="true"
+              />
+              <button type="submit" class="btn btn--primary dash-scan-form__btn" id="dash-scan-btn">
+                <span class="dash-scan-form__btn-text">Full Scan</span>
+                <span class="dash-scan-form__btn-loading" hidden aria-hidden="true">Scanning...</span>
+              </button>
+            </div>
+
+            <!-- Crawl Options (collapsible) -->
+            <details class="dash-scan-options" id="dash-scan-options">
+              <summary class="dash-scan-options__toggle">Scan Options</summary>
+              <div class="dash-scan-options__body">
+                <div class="dash-scan-options__grid">
+                  <div class="dash-scan-options__field">
+                    <label for="opt-max-pages" class="dash-scan-options__label">Max pages</label>
+                    <input type="number" id="opt-max-pages" name="maxPages" class="dash-scan-options__input" value="50" min="1" max="100" />
+                  </div>
+                  <div class="dash-scan-options__field">
+                    <label for="opt-max-depth" class="dash-scan-options__label">Max depth</label>
+                    <input type="number" id="opt-max-depth" name="maxDepth" class="dash-scan-options__input" value="3" min="1" max="10" />
+                  </div>
+                  <div class="dash-scan-options__field dash-scan-options__field--toggle">
+                    <label for="opt-robots" class="dash-scan-options__label">Respect robots.txt</label>
+                    <input type="checkbox" id="opt-robots" name="respectRobots" class="dash-scan-options__checkbox" checked />
+                  </div>
+                  <div class="dash-scan-options__field dash-scan-options__field--toggle">
+                    <label for="opt-age-gate" class="dash-scan-options__label">Handle age gate</label>
+                    <input type="checkbox" id="opt-age-gate" name="handleAgeGate" class="dash-scan-options__checkbox" />
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <div id="dash-scan-error" class="dash-scan-form__error" role="alert" aria-live="polite" hidden></div>
+          </form>
+          <div class="dash-scan-progress" id="dash-scan-progress" hidden>
+            <div class="dash-scan-progress__bar">
+              <div class="dash-scan-progress__fill" id="dash-progress-fill"></div>
+            </div>
+            <p class="dash-scan-progress__status" id="dash-progress-status">Initializing scan...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ CLIENT PROFILES GRID ═════════════════════════════ -->
+      <section class="dash-clients" id="dash-clients" aria-labelledby="clients-heading">
+        <h2 class="dash-clients__heading" id="clients-heading">Clients</h2>
+        <div class="dash-clients__grid" id="dash-clients-grid">
+          <p class="dash-clients__empty" id="clients-empty">No clients yet. Run your first scan to create a client profile.</p>
+        </div>
+      </section>
+
+      <!-- ═══ CLIENT DETAIL VIEW (hidden by default) ═══════════ -->
+      <section class="dash-client-detail" id="dash-client-detail" hidden aria-labelledby="client-detail-heading">
+
+        <!-- Back button + Client header -->
+        <div class="dash-client-detail__header">
+          <button class="btn btn--secondary dash-client-detail__back" id="btn-back-clients" aria-label="Back to all clients">← Back to All Clients</button>
+          <div class="dash-client-detail__info">
+            <img class="dash-client-detail__favicon" id="client-favicon" src="" alt="" width="32" height="32" />
+            <div>
+              <h2 class="dash-client-detail__name" id="client-detail-heading">
+                <span id="client-name-display"></span>
+                <button class="dash-client-detail__edit-name" id="btn-edit-name" aria-label="Edit client name" title="Edit name">✎</button>
+              </h2>
+              <span class="dash-client-detail__domain" id="client-domain-display"></span>
+            </div>
+          </div>
+          <div class="dash-client-detail__actions">
+            <button class="btn btn--secondary btn--sm" id="btn-delete-client">Delete Client</button>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="dash-client-detail__notes">
+          <label for="client-notes" class="dash-client-detail__notes-label">Notes</label>
+          <textarea id="client-notes" class="dash-client-detail__notes-input" rows="3" placeholder="Add notes about this client..."></textarea>
+          <button class="btn btn--secondary btn--sm dash-client-detail__notes-save" id="btn-save-notes">Save Notes</button>
+        </div>
+
+        <!-- Outreach -->
+        <div class="dash-client-detail__outreach">
+          <label for="client-contact-email" class="dash-client-detail__notes-label">Outreach</label>
+          <div class="dash-client-detail__outreach-row">
+            <input type="email" id="client-contact-email" class="dash-client-detail__outreach-input" placeholder="client@company.com" />
+            <button class="btn btn--primary btn--sm" id="btn-send-outreach">Send Snapshot</button>
+          </div>
+          <p class="dash-client-detail__outreach-status" id="outreach-status"></p>
+        </div>
+
+        <!-- ═══ SCAN RESULTS (tabbed) ═══════════════════════════ -->
+        <div class="dash-results" id="dash-results" aria-labelledby="results-heading">
+
+          <!-- Results Header -->
+          <div class="dash-results__header">
+            <div class="dash-results__header-top">
+              <h3 class="dash-results__title" id="results-heading">Latest Scan</h3>
+              <div class="dash-results__actions">
+                <button class="btn btn--primary btn--sm" id="btn-rescan">Rescan</button>
+                <button class="btn btn--primary btn--sm" id="btn-client-report">Export Client Report</button>
+                <button class="btn btn--secondary btn--sm" id="btn-csv-export">Download CSV</button>
+                <button class="btn btn--secondary btn--sm" id="btn-workbook-export">Export Workbook</button>
+              </div>
+            </div>
+            <div class="dash-results__meta">
+              <span class="dash-results__url" id="results-url"></span>
+              <span class="dash-results__separator">·</span>
+              <span class="dash-results__date" id="results-date"></span>
+              <span class="dash-results__separator" id="results-pages-sep">·</span>
+              <span class="dash-results__pages" id="results-pages"></span>
+              <span class="dash-results__separator dash-results__last-updated-sep" id="results-updated-sep" hidden>·</span>
+              <span class="dash-results__date" id="results-last-updated" hidden></span>
+            </div>
+          </div>
+
+          <!-- ─── Tab Navigation ──────────────────────────────── -->
+          <div class="dash-tabs" role="tablist" aria-label="Scan result views">
+            <button class="dash-tabs__tab dash-tabs__tab--active" role="tab" aria-selected="true" aria-controls="tab-overview" id="tab-btn-overview">Overview</button>
+            <button class="dash-tabs__tab" role="tab" aria-selected="false" aria-controls="tab-issues" id="tab-btn-issues">Issues</button>
+            <button class="dash-tabs__tab" role="tab" aria-selected="false" aria-controls="tab-aeo" id="tab-btn-aeo">AEO Health</button>
+            <button class="dash-tabs__tab" role="tab" aria-selected="false" aria-controls="tab-quote" id="tab-btn-quote">Quote</button>
+            <button class="dash-tabs__tab" role="tab" aria-selected="false" aria-controls="tab-pages" id="tab-btn-pages">Pages</button>
+          </div>
+
+          <!-- ═══ TAB: OVERVIEW ═════════════════════════════════ -->
+          <div class="dash-tab-panel" id="tab-overview" role="tabpanel" aria-labelledby="tab-btn-overview">
+            <div class="overview-top">
+              <div class="overview-score-card">
+                <h4 class="overview-score-card__title">Accessibility</h4>
+                <p class="overview-score-card__subtitle">How compliant this website is with the WCAG 2.2 accessibility standard.</p>
+                <div class="overview-score-card__gauge">
+                  <div class="gauge-ring">
+                    <svg class="gauge-svg" viewBox="0 0 120 120" aria-hidden="true">
+                      <circle class="gauge-bg" cx="60" cy="60" r="52" />
+                      <circle class="gauge-fill" id="gauge-fill" cx="60" cy="60" r="52" />
+                    </svg>
+                    <div class="gauge-value">
+                      <span class="gauge-value__number" id="gauge-score">0</span>
+                      <span class="gauge-value__unit">%</span>
+                    </div>
+                  </div>
+                  <span class="gauge-label" id="gauge-label">Analyzing...</span>
+                </div>
+              </div>
+              <div class="overview-sparkline-card">
+                <h4 class="overview-sparkline-card__title">Score Over Time</h4>
+                <canvas id="chart-score-time" class="overview-chart-canvas" aria-label="Score over time line chart"></canvas>
+                <p class="overview-sparkline-card__empty" id="sparkline-empty" hidden>Run more scans on this domain to see trends.</p>
+              </div>
+            </div>
+
+            <div class="overview-levels">
+              <div class="overview-level-card" data-level="A">
+                <div class="overview-level-card__header">
+                  <span class="overview-level-card__badge">Level A</span>
+                  <div class="overview-level-card__bar"><div class="overview-level-card__bar-fill" id="level-a-bar"></div></div>
+                </div>
+                <div class="overview-level-card__body">
+                  <span class="overview-level-card__value" id="level-a-pct">0%</span>
+                  <span class="overview-level-card__count" id="level-a-count">0 issues</span>
+                </div>
+                <p class="overview-level-card__info">Minimum compliance. Covers essential barriers: alt text, keyboard access, form labels, page titles. Failure here means some users are completely blocked.</p>
+              </div>
+              <div class="overview-level-card" data-level="AA">
+                <div class="overview-level-card__header">
+                  <span class="overview-level-card__badge">Level AA</span>
+                  <div class="overview-level-card__bar"><div class="overview-level-card__bar-fill" id="level-aa-bar"></div></div>
+                </div>
+                <div class="overview-level-card__body">
+                  <span class="overview-level-card__value" id="level-aa-pct">0%</span>
+                  <span class="overview-level-card__count" id="level-aa-count">0 issues</span>
+                </div>
+                <p class="overview-level-card__info">Industry standard (required by ADA lawsuits). Covers color contrast (4.5:1), consistent navigation, error identification. Most legal risk lives here.</p>
+              </div>
+              <div class="overview-level-card" data-level="AAA">
+                <div class="overview-level-card__header">
+                  <span class="overview-level-card__badge">Level AAA</span>
+                  <div class="overview-level-card__bar"><div class="overview-level-card__bar-fill" id="level-aaa-bar"></div></div>
+                </div>
+                <div class="overview-level-card__body">
+                  <span class="overview-level-card__value" id="level-aaa-pct">0%</span>
+                  <span class="overview-level-card__count" id="level-aaa-count">0 issues</span>
+                </div>
+                <p class="overview-level-card__info">Enhanced accessibility. Covers 7:1 contrast, sign language for video, simplified reading level. Aspirational for most sites — exceeds legal requirements.</p>
+              </div>
+            </div>
+
+            <div class="overview-charts">
+              <div class="overview-chart-card">
+                <h4 class="overview-chart-card__title">Most Common Issues</h4>
+                <canvas id="chart-common-issues" class="overview-chart-canvas" aria-label="Most common issues donut chart"></canvas>
+              </div>
+              <div class="overview-chart-card">
+                <h4 class="overview-chart-card__title">Average Issues per Page</h4>
+                <canvas id="chart-issues-depth" class="overview-chart-canvas" aria-label="Average issues by page depth bar chart"></canvas>
+              </div>
+            </div>
+
+            <div class="overview-disabilities">
+              <div class="overview-disability-card" data-category="visual">
+                <div class="overview-disability-card__icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <span class="overview-disability-card__label">Visual</span>
+                <span class="overview-disability-card__value" id="disability-visual">0</span>
+                <span class="overview-disability-card__unit">failing checks</span>
+              </div>
+              <div class="overview-disability-card" data-category="auditory">
+                <div class="overview-disability-card__icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                </div>
+                <span class="overview-disability-card__label">Auditory</span>
+                <span class="overview-disability-card__value" id="disability-auditory">0</span>
+                <span class="overview-disability-card__unit">failing checks</span>
+              </div>
+              <div class="overview-disability-card" data-category="motor">
+                <div class="overview-disability-card__icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-9.33-5"/><path d="M20.83 14.83A9 9 0 1 1 9.17 3.17"/><path d="M12 12l4 4"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <span class="overview-disability-card__label">Motor</span>
+                <span class="overview-disability-card__value" id="disability-motor">0</span>
+                <span class="overview-disability-card__unit">failing checks</span>
+              </div>
+              <div class="overview-disability-card" data-category="cognitive">
+                <div class="overview-disability-card__icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V20a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><path d="M10 14h4"/></svg>
+                </div>
+                <span class="overview-disability-card__label">Cognitive</span>
+                <span class="overview-disability-card__value" id="disability-cognitive">0</span>
+                <span class="overview-disability-card__unit">failing checks</span>
+              </div>
+            </div>
+
+            <div class="overview-timeline-card">
+              <h4 class="overview-timeline-card__title">Levels Over Time</h4>
+              <canvas id="chart-levels-time" class="overview-chart-canvas overview-chart-canvas--wide" aria-label="WCAG levels over time line chart"></canvas>
+              <p class="overview-timeline-card__empty" id="timeline-empty" hidden>Historical data will appear after multiple scans of this domain.</p>
+            </div>
+          </div>
+
+          <!-- ═══ TAB: ISSUES ═══════════════════════════════════ -->
+          <div class="dash-tab-panel dash-tab-panel--hidden" id="tab-issues" role="tabpanel" aria-labelledby="tab-btn-issues" hidden>
+            <div class="dash-summary" id="dash-summary">
+              <div class="dash-summary__card">
+                <span class="dash-summary__number" id="sum-total">0</span>
+                <span class="dash-summary__label">Total Issues</span>
+              </div>
+              <div class="dash-summary__card dash-summary__card--critical">
+                <span class="dash-summary__number" id="sum-critical">0</span>
+                <span class="dash-summary__label">Critical</span>
+              </div>
+              <div class="dash-summary__card dash-summary__card--serious">
+                <span class="dash-summary__number" id="sum-serious">0</span>
+                <span class="dash-summary__label">Serious</span>
+              </div>
+              <div class="dash-summary__card dash-summary__card--moderate">
+                <span class="dash-summary__number" id="sum-moderate">0</span>
+                <span class="dash-summary__label">Moderate</span>
+              </div>
+              <div class="dash-summary__card dash-summary__card--minor">
+                <span class="dash-summary__number" id="sum-minor">0</span>
+                <span class="dash-summary__label">Minor</span>
+              </div>
+              <div class="dash-summary__card dash-summary__card--aeo">
+                <span class="dash-summary__number" id="sum-aeo-grade">—</span>
+                <span class="dash-summary__label">AEO Grade</span>
+                <span class="dash-summary__sub" id="sum-aeo-score"></span>
+              </div>
+            </div>
+            <div class="dash-panel" id="dash-issues-panel">
+              <div class="dash-panel__header">
+                <h4 class="dash-panel__heading">All Issues</h4>
+                <div class="dash-filter" role="group" aria-label="Filter issues by category">
+                  <button class="dash-filter__btn dash-filter__btn--active" data-filter="all">All</button>
+                  <button class="dash-filter__btn" data-filter="technical">Technical</button>
+                  <button class="dash-filter__btn" data-filter="content">Content</button>
+                </div>
+              </div>
+              <div class="dash-issues" id="dash-issues-list" role="list" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- ═══ TAB: AEO HEALTH ═══════════════════════════════ -->
+          <div class="dash-tab-panel dash-tab-panel--hidden" id="tab-aeo" role="tabpanel" aria-labelledby="tab-btn-aeo" hidden>
+            <div class="dash-panel" id="dash-aeo-panel">
+              <h4 class="dash-panel__heading">AEO Health Analysis</h4>
+              <div class="dash-aeo-summary" id="dash-aeo-summary"></div>
+              <ul class="dash-aeo-list" id="dash-aeo-findings" role="list"></ul>
+            </div>
+          </div>
+
+          <!-- ═══ TAB: QUOTE ════════════════════════════════════ -->
+          <div class="dash-tab-panel dash-tab-panel--hidden" id="tab-quote" role="tabpanel" aria-labelledby="tab-btn-quote" hidden>
+            <div class="dash-panel dash-panel--quote" id="dash-quote-panel">
+              <h4 class="dash-panel__heading">Generated Quote</h4>
+              <div class="dash-quote" id="dash-quote-content"></div>
+            </div>
+          </div>
+
+          <!-- ═══ TAB: PAGES ════════════════════════════════════ -->
+          <div class="dash-tab-panel dash-tab-panel--hidden" id="tab-pages" role="tabpanel" aria-labelledby="tab-btn-pages" hidden>
+            <div class="dash-panel">
+              <h4 class="dash-panel__heading">Pages Scanned</h4>
+              <div class="dash-pages-table-wrap">
+                <table class="dash-pages-table" id="dash-pages-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Page</th>
+                      <th scope="col">Depth</th>
+                      <th scope="col">Issues</th>
+                      <th scope="col">AEO</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dash-pages-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ═══ SCAN HISTORY FOR THIS CLIENT ═══════════════════ -->
+        <section class="dash-client-history" aria-labelledby="client-history-heading">
+          <div class="dash-client-history__header">
+            <h3 class="dash-client-history__heading" id="client-history-heading">Scan History</h3>
+            <div class="dash-compare-bar" id="dash-compare-bar" hidden>
+              <span class="dash-compare-bar__count" id="compare-count">0 selected</span>
+              <button class="btn btn--primary btn--sm" id="btn-compare" disabled>Compare Scans</button>
+              <button class="btn btn--secondary btn--sm" id="btn-compare-clear">Clear</button>
+            </div>
+          </div>
+          <p class="dash-client-history__hint" id="compare-hint">Tip: select two scans below to compare progress over time.</p>
+          <div class="dash-client-history__table-wrap">
+            <table class="dash-history__table" id="client-history-table">
+              <thead>
+                <tr>
+                  <th scope="col" style="width:36px;"><span class="sr-only">Select</span></th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Pages</th>
+                  <th scope="col">Issues</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">AEO</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="client-history-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══ COMPARISON VIEW (inline, appears when comparing) ═══ -->
+        <section class="dash-comparison" id="dash-comparison" hidden aria-labelledby="comparison-heading">
+          <div class="dash-comparison__header">
+            <h3 class="dash-comparison__heading" id="comparison-heading">Scan Comparison</h3>
+            <div class="dash-comparison__actions">
+              <button class="btn btn--primary btn--sm" id="btn-comparison-report">Download Report</button>
+              <button class="btn btn--secondary btn--sm" id="btn-comparison-close">Close</button>
+            </div>
+          </div>
+          <div id="comparison-content"></div>
+        </section>
+
+      </section>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="/js/scanner-app.js?v=11" defer></script>
+</body>
+</html>

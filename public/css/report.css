@@ -1,0 +1,143 @@
+/* Simply Black and White — Client Report Styles */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-black: #000000;
+  --color-charcoal: #1A1A1A;
+  --color-stone: #E5E5E5;
+  --color-ivory: #F7F7F5;
+  --color-taupe: #CBB9A6;
+  --color-surface: #ffffff;
+  --font-heading: 'Libre Baskerville', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-charcoal);
+  background: var(--color-surface);
+}
+
+.report { max-width: 900px; margin: 0 auto; padding: 48px; }
+
+/* Actions bar */
+.report-actions { text-align: center; margin-bottom: 32px; }
+.report-actions__btn {
+  padding: 10px 24px; background: var(--color-charcoal); color: var(--color-ivory);
+  border: none; border-radius: 6px; font-family: var(--font-body);
+  font-size: 14px; font-weight: 500; cursor: pointer; margin: 0 8px;
+}
+.report-actions__btn:hover { opacity: 0.85; }
+
+/* Header */
+.report-header { text-align: center; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 2px solid var(--color-charcoal); }
+.report-header__logo { font-family: var(--font-heading); font-size: 28px; font-weight: 700; color: var(--color-charcoal); margin-bottom: 4px; }
+.report-header__tagline { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 32px; }
+.report-header__title { font-family: var(--font-heading); font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+.report-header__meta { font-size: 13px; color: #666; }
+
+/* Compliance Score */
+.compliance-score { text-align: center; margin-bottom: 40px; padding: 32px; background: var(--color-ivory); border-radius: 12px; }
+.compliance-score__value { font-size: 56px; font-weight: 700; color: var(--color-charcoal); line-height: 1; }
+.compliance-score__label { font-size: 13px; color: #666; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px; }
+.compliance-score__method { font-size: 11px; color: #999; margin-top: 12px; max-width: 600px; margin-inline: auto; line-height: 1.5; }
+
+/* Element counts */
+.element-counts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+.element-count { text-align: center; padding: 20px; border-radius: 8px; border: 1px solid var(--color-stone); }
+.element-count--fail { border-left: 4px solid #c0392b; }
+.element-count--warn { border-left: 4px solid #f39c12; }
+.element-count--pass { border-left: 4px solid #2d7a3a; }
+.element-count__number { font-size: 28px; font-weight: 700; display: block; }
+.element-count__label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: #666; }
+
+/* Summary cards */
+.exec-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+.exec-card { text-align: center; padding: 20px 12px; border: 1px solid var(--color-stone); border-radius: 8px; }
+.exec-card__number { display: block; font-size: 28px; font-weight: 700; color: var(--color-charcoal); }
+.exec-card__label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: #666; margin-top: 4px; }
+.exec-card--critical { border-top: 3px solid #c0392b; }
+.exec-card--serious { border-top: 3px solid #e67e22; }
+.exec-card--moderate { border-top: 3px solid #f39c12; }
+.exec-card--minor { border-top: 3px solid #95a5a6; }
+.exec-card--aeo { border-top: 3px solid var(--color-taupe); }
+
+/* Sections */
+.report-section { margin-bottom: 48px; }
+.report-section__heading { font-family: var(--font-heading); font-size: 18px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--color-stone); }
+.report-section__subheading { font-size: 12px; color: #666; margin-bottom: 24px; }
+.exec-summary__text { font-size: 14px; line-height: 1.7; color: #444; margin-bottom: 24px; }
+
+/* AEO */
+.aeo-score-bar { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding: 20px; background: var(--color-ivory); border-radius: 8px; }
+.aeo-score-bar__grade { width: 48px; height: 48px; border-radius: 50%; background: var(--color-charcoal); color: var(--color-ivory); font-family: var(--font-heading); font-size: 20px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.aeo-score-bar__value { font-weight: 700; font-size: 18px; }
+.aeo-finding { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--color-stone); font-size: 13px; }
+.aeo-finding:last-child { border-bottom: none; }
+.aeo-icon--pass { color: #2d7a3a; }
+.aeo-icon--warn { color: #9a6700; }
+.aeo-icon--fail { color: #c0392b; }
+
+/* Issue cards */
+.report-issue { padding: 24px; border: 1px solid var(--color-stone); border-radius: 8px; margin-bottom: 20px; border-left: 4px solid var(--color-stone); page-break-inside: avoid; }
+.report-issue--critical { border-left-color: #c0392b; }
+.report-issue--serious { border-left-color: #e67e22; }
+.report-issue--moderate { border-left-color: #f39c12; }
+.report-issue--minor { border-left-color: #95a5a6; }
+
+.report-issue__badges { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+.report-issue__badge { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.03em; }
+.report-issue__badge--critical { background: #fde8e8; color: #7a1e1e; }
+.report-issue__badge--serious { background: #fef0e3; color: #7a4a0a; }
+.report-issue__badge--moderate { background: #fef9e7; color: #6e5b00; }
+.report-issue__badge--minor { background: #f0f0f0; color: #555; }
+.report-issue__badge--content { background: #e8f5e9; color: #1b5e20; }
+.report-issue__badge--technical { background: #e3f2fd; color: #0d47a1; }
+.report-issue__instances { font-size: 12px; color: #666; margin-left: auto; }
+
+.report-issue__title { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--color-charcoal); }
+.report-issue__rule { font-size: 11px; color: #999; margin-bottom: 12px; font-family: monospace; }
+.report-issue__ensure { font-size: 13px; color: #444; margin-bottom: 12px; }
+
+.report-issue__row { font-size: 13px; margin-bottom: 8px; line-height: 1.6; }
+.report-issue__row strong { color: var(--color-charcoal); }
+.report-issue__row--fix { background: var(--color-ivory); padding: 12px 16px; border-radius: 6px; }
+
+.report-issue__meta { font-size: 11px; color: #888; margin-top: 12px; line-height: 1.6; }
+
+/* Common occurrences */
+.common-list { list-style: none; padding: 0; }
+.common-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--color-stone); }
+.common-item:last-child { border-bottom: none; }
+.common-item__name { font-size: 14px; font-weight: 500; }
+.common-item__count { font-size: 13px; color: #666; background: var(--color-ivory); padding: 2px 10px; border-radius: 12px; }
+
+/* Terminology */
+.terminology-list { list-style: none; padding: 0; }
+.terminology-item { padding: 8px 0; border-bottom: 1px solid var(--color-stone); font-size: 13px; line-height: 1.5; }
+.terminology-item:last-child { border-bottom: none; }
+.terminology-item strong { color: var(--color-charcoal); }
+.terminology-item span { color: #555; }
+
+/* CTA */
+.report-cta { text-align: center; padding: 40px; background: var(--color-charcoal); color: var(--color-ivory); border-radius: 12px; margin-bottom: 32px; }
+.report-cta__heading { font-family: var(--font-heading); font-size: 20px; margin-bottom: 12px; }
+.report-cta__text { font-size: 14px; color: var(--color-stone); margin-bottom: 20px; }
+.report-cta__btn { display: inline-block; padding: 12px 32px; background: var(--color-taupe); color: var(--color-charcoal); font-weight: 600; text-decoration: none; border-radius: 6px; font-size: 14px; }
+
+/* Footer */
+.report-footer { text-align: center; font-size: 11px; color: #999; padding-top: 24px; border-top: 1px solid var(--color-stone); }
+.report-footer__brand { font-family: var(--font-heading); font-size: 14px; color: var(--color-charcoal); margin-bottom: 4px; }
+
+/* Loading */
+.report-loading { text-align: center; padding: 80px 20px; font-size: 16px; color: #666; }
+
+/* Print */
+@media print {
+  body { padding: 0; font-size: 12px; }
+  .report { padding: 24px; max-width: 100%; }
+  .report-actions { display: none; }
+  .report-cta, .report-issue { page-break-inside: avoid; }
+}

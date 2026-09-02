@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Progress Report — Simply Black and White</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/report.css" />
+  <style>
+    .cmpr-headline { text-align: center; padding: 32px; border-radius: 12px; margin-bottom: 32px; background: #F7F7F5; }
+    .cmpr-headline__momentum { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 12px; }
+    .cmpr-scores { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 8px; }
+    .cmpr-scores__from { font-size: 32px; font-weight: 700; color: #999; }
+    .cmpr-scores__arrow { font-size: 28px; color: #999; }
+    .cmpr-scores__to { font-size: 52px; font-weight: 700; color: #1A1A1A; }
+    .cmpr-scores__delta { font-size: 18px; font-weight: 700; padding: 4px 12px; border-radius: 999px; color: #fff; }
+    .cmpr-delta--pos { background: #2d7a3a; }
+    .cmpr-delta--neg { background: #c0392b; }
+    .cmpr-delta--flat { background: #95a5a6; }
+    .cmpr-dates { font-size: 14px; color: #666; }
+    .cmpr-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    .cmpr-card { background: #F7F7F5; border-radius: 10px; padding: 16px; text-align: center; border-top: 3px solid #E5E5E5; }
+    .cmpr-card__value { display: block; font-size: 28px; font-weight: 700; color: #1A1A1A; }
+    .cmpr-card__label { display: block; font-size: 13px; font-weight: 600; margin-top: 4px; }
+    .cmpr-card__sub { display: block; font-size: 11px; color: #666; }
+    .cmpr-talking { background: #F7F7F5; border-radius: 10px; padding: 20px; margin-bottom: 32px; border-left: 3px solid #CBB9A6; }
+    .cmpr-talking li { font-size: 14px; line-height: 1.6; margin-bottom: 8px; }
+    .cmpr-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+    .cmpr-col { background: #F7F7F5; border-radius: 10px; padding: 16px; }
+    .cmpr-col__title { font-size: 14px; font-weight: 700; margin: 0 0 8px; }
+    .cmpr-col__item { font-size: 12px; line-height: 1.5; margin-bottom: 6px; padding-left: 4px; }
+    @media print { .report-actions { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="report-container" id="report-container">
+    <p class="report-loading" id="report-loading">Loading progress report...</p>
+  </div>
+
+  <script>
+  (function () {
+    var parts = window.location.pathname.split('/');
+    var id1 = parts[parts.length - 2];
+    var id2 = parts[parts.length - 1];
+
+    fetch('/scanner/api/compare/' + id1 + '/' + id2)
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data.success) {
+          document.getElementById('report-loading').textContent = 'Could not load comparison.';
+          return;
+        }
+        render(data.comparison);
+      })
+      .catch(function () {
+        document.getElementById('report-loading').textContent = 'Error loading report.';
+      });
+
+    function render(c) {
+      var container = document.getElementById('report-container');
+      var up = c.deltas.score > 0, flat = c.deltas.score === 0;
+      var deltaCls = up ? 'pos' : flat ? 'flat' : 'neg';
+      var arrow = up ? '↑' : flat ? '→' : '↓';
+      var sign = c.deltas.score > 0 ? '+' : '';
+      var domain = friendlyDomain(c.domain);
+      var html = '';
+
+      // Actions
+      html += '<div class="report-actions">';
+      html += '<button class="report-actions__btn" onclick="window.print()">Print / Save as PDF</button>';
+      html += '<button class="report-actions__btn" onclick="window.close()">Close</button>';
+      html += '</div>';
+
+      // Header
+      html += '<header class="report-header">';
+      html += '<div class="report-header__logo">Simply Black and White</div>';
+      html += '<div class="report-header__tagline">Accessibility · AEO Consultancy</div>';
+      html += '<h1 class="report-header__title">Accessibility Progress Report</h1>';
+      html += '<p class="report-header__meta">' + esc(domain) + '</p>';
+      html += '</header>';
+
+      // Headline
+      html += '<div class="cmpr-headline">';
+      html += '<div class="cmpr-headline__momentum">' + esc(c.momentum.label) + '</div>';
+      html += '<div class="cmpr-scores">';
+      html += '<span class="cmpr-scores__from">' + c.earlier.score + '%</span>';
+      html += '<span class="cmpr-scores__arrow">' + arrow + '</span>';
+      html += '<span class="cmpr-scores__to">' + c.later.score + '%</span>';
+      html += '<span class="cmpr-scores__delta cmpr-delta--' + deltaCls + '">' + sign + c.deltas.score + '</span>';
+      html += '</div>';
+      html += '<div class="cmpr-dates">' + fmtDate(c.earlier.date) + ' → ' + fmtDate(c.later.date) + ' · ' + c.daysBetween + ' days apart</div>';
+      html += '</div>';
+
+      // Cards
+      html += '<div class="cmpr-cards">';
+      html += card(c.summary.resolvedCount, 'Resolved', 'issue types cleared');
+      html += card(c.summary.newCount, 'New', 'issue types appeared');
+      html += card(c.summary.persistentCount, 'Still Failing', 'need attention');
+      html += card((c.deltas.issues > 0 ? '+' : '') + c.deltas.issues, 'Total Issues', c.earlier.issues + ' → ' + c.later.issues);
+      html += '</div>';
+
+      // Talking points / summary
+      if (c.talkingPoints && c.talkingPoints.length) {
+        html += '<section class="report-section"><h2 class="report-section__heading">Summary</h2>';
+        html += '<div class="cmpr-talking"><ul>';
+        c.talkingPoints.forEach(function (p) { html += '<li>' + esc(p) + '</li>'; });
+        html += '</ul></div></section>';
+      }
+
+      // Columns
+      html += '<section class="report-section"><h2 class="report-section__heading">What Changed</h2>';
+      html += '<div class="cmpr-cols">';
+      html += col('Resolved', c.resolved, '#2d7a3a');
+      html += col('New Issues', c.newIssues, '#c0392b');
+      html += col('Still Failing', c.persistent, '#1A1A1A');
+      html += '</div></section>';
+
+      // Footer
+      html += '<footer class="report-footer">';
+      html += '<p class="report-footer__brand">Simply Black and White</p>';
+      html += '<p>simplyblackandwhite.com</p>';
+      html += '<p style="margin-top:8px;">This report compares two accessibility scans over time. It is provided for informational purposes and does not constitute a guarantee of compliance.</p>';
+      html += '</footer>';
+
+      container.innerHTML = html;
+    }
+
+    function card(value, label, sub) {
+      return '<div class="cmpr-card"><span class="cmpr-card__value">' + value + '</span><span class="cmpr-card__label">' + esc(label) + '</span><span class="cmpr-card__sub">' + esc(sub) + '</span></div>';
+    }
+
+    function col(title, items, color) {
+      var html = '<div class="cmpr-col"><h3 class="cmpr-col__title" style="color:' + color + '">' + esc(title) + ' (' + items.length + ')</h3>';
+      if (items.length === 0) { html += '<p style="font-size:12px;color:#999;font-style:italic;">None</p>'; }
+      else { items.slice(0, 12).forEach(function (i) { html += '<div class="cmpr-col__item">• ' + esc(i.description || i.id) + '</div>'; }); }
+      html += '</div>';
+      return html;
+    }
+
+    function friendlyDomain(url) { try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return url; } }
+    function fmtDate(s) { if (!s) return ''; var d = new Date(s); return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }); }
+    function esc(s) { var d = document.createElement('div'); d.appendChild(document.createTextNode(s || '')); return d.innerHTML; }
+  })();
+  </script>
+</body>
+</html>

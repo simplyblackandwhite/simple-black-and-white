@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Your Accessibility Snapshot — Simply Black and White</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --charcoal: #1A1A1A; --ivory: #F7F7F5; --stone: #E5E5E5; --taupe: #CBB9A6;
+      --text-muted: #4A4A4A; --surface: #ffffff;
+    }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--ivory); color: var(--charcoal); line-height: 1.6; }
+    .container { max-width: 680px; margin: 0 auto; padding: 24px; }
+
+    .header { background: var(--charcoal); padding: 32px 24px; text-align: center; }
+    .header__logo { font-family: 'Libre Baskerville', Georgia, serif; color: var(--ivory); font-size: 22px; font-weight: 700; }
+    .header__tagline { color: var(--taupe); font-size: 12px; margin-top: 4px; }
+
+    .score-card { background: var(--surface); border-radius: 12px; padding: 40px; text-align: center; margin: 32px 0; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .score-card__number { font-size: 56px; font-weight: 700; color: var(--charcoal); line-height: 1; }
+    .score-card__label { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px; }
+
+    .summary { background: var(--surface); border-radius: 12px; padding: 28px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .summary__heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; margin-bottom: 16px; }
+    .summary__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+    .summary__stat { text-align: center; padding: 12px; background: var(--ivory); border-radius: 8px; }
+    .summary__stat-value { display: block; font-size: 24px; font-weight: 700; }
+    .summary__stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; }
+    .summary__stat--critical .summary__stat-value { color: #c0392b; }
+    .summary__stat--serious .summary__stat-value { color: #e67e22; }
+
+    .findings { background: var(--surface); border-radius: 12px; padding: 28px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .findings__heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; margin-bottom: 16px; }
+    .findings__list { list-style: none; padding: 0; }
+    .findings__item { padding: 10px 0; border-bottom: 1px solid var(--stone); font-size: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .findings__item:last-child { border-bottom: none; }
+    .findings__icon { flex-shrink: 0; }
+    .icon-pass { color: #2d7a3a; } .icon-warn { color: #9a6700; } .icon-fail { color: #c0392b; }
+
+    .gated { background: var(--ivory); border: 1px solid var(--stone); border-radius: 8px; padding: 20px; text-align: center; margin: 24px 0; }
+    .gated__text { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
+
+    .cta { background: var(--charcoal); border-radius: 12px; padding: 40px; text-align: center; margin: 32px 0; }
+    .cta__heading { font-family: 'Libre Baskerville', Georgia, serif; color: var(--ivory); font-size: 22px; margin-bottom: 12px; }
+    .cta__text { color: var(--stone); font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
+    .cta__btn { display: inline-block; background: var(--taupe); color: var(--charcoal); padding: 14px 32px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 15px; }
+    .cta__btn:hover { opacity: 0.9; }
+
+    .footer { text-align: center; padding: 24px; font-size: 12px; color: var(--text-muted); }
+
+    .loading { text-align: center; padding: 60px 24px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header__logo">Simply Black and White</div>
+    <div class="header__tagline">Accessibility · AEO Consultancy</div>
+  </header>
+
+  <div class="container">
+    <p class="loading" id="report-loading">Loading your accessibility snapshot...</p>
+    <div id="report-content" hidden></div>
+  </div>
+
+  <script>
+  (function () {
+    var pathParts = window.location.pathname.split('/');
+    var token = pathParts[pathParts.length - 1];
+
+    if (!token) {
+      document.getElementById('report-loading').textContent = 'Invalid report link.';
+      return;
+    }
+
+    fetch('/api/report/snapshot/' + token)
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data.success || !data.scan) {
+          document.getElementById('report-loading').textContent = 'This report has expired or could not be found.';
+          return;
+        }
+        renderSnapshot(data.scan);
+      })
+      .catch(function () {
+        document.getElementById('report-loading').textContent = 'Error loading report.';
+      });
+
+    function renderSnapshot(scan) {
+      document.getElementById('report-loading').hidden = true;
+      var container = document.getElementById('report-content');
+      container.hidden = false;
+
+      var score = Math.max(0, 100 - (scan.critical * 15 + scan.serious * 8 + scan.moderate * 3 + scan.minor * 1));
+      var html = '';
+
+      // Score
+      html += '<div class="score-card">';
+      html += '<div class="score-card__number">' + score + '%</div>';
+      html += '<div class="score-card__label">Accessibility Compliance Score</div>';
+      html += '</div>';
+
+      // Summary
+      html += '<div class="summary">';
+      html += '<h2 class="summary__heading">Scan Summary for ' + esc(scan.url) + '</h2>';
+      html += '<div class="summary__grid">';
+      html += '<div class="summary__stat summary__stat--critical"><span class="summary__stat-value">' + scan.critical + '</span><span class="summary__stat-label">Critical</span></div>';
+      html += '<div class="summary__stat summary__stat--serious"><span class="summary__stat-value">' + scan.serious + '</span><span class="summary__stat-label">Serious</span></div>';
+      html += '<div class="summary__stat"><span class="summary__stat-value">' + scan.totalIssues + '</span><span class="summary__stat-label">Total Issues</span></div>';
+      html += '</div>';
+
+      if (scan.humanRisks && scan.humanRisks.length > 0) {
+        html += '<h3 style="font-size:14px;font-weight:600;margin-bottom:8px;">What this means for your visitors:</h3>';
+        html += '<ul style="padding-left:20px;font-size:14px;color:#4A4A4A;line-height:1.8;">';
+        scan.humanRisks.forEach(function (r) { html += '<li>' + esc(r) + '</li>'; });
+        html += '</ul>';
+      }
+      html += '</div>';
+
+      // AEO
+      if (scan.aeoGrade) {
+        html += '<div class="findings">';
+        html += '<h2 class="findings__heading">AI Search Visibility: Grade ' + esc(scan.aeoGrade) + '</h2>';
+        if (scan.aeoFindings && scan.aeoFindings.length > 0) {
+          html += '<ul class="findings__list">';
+          scan.aeoFindings.forEach(function (f) {
+            var icon = f.status === 'pass' ? '✓' : f.status === 'warn' ? '⚠' : '✗';
+            var cls = 'icon-' + f.status;
+            html += '<li class="findings__item"><span class="findings__icon ' + cls + '">' + icon + '</span><span>' + esc(f.text) + '</span></li>';
+          });
+          html += '</ul>';
+        }
+        html += '</div>';
+      }
+
+      // Gated content teaser
+      html += '<div class="gated">';
+      html += '<p class="gated__text">The full report includes specific code locations, fix instructions for each issue, and a prioritized remediation plan.</p>';
+      html += '</div>';
+
+      // CTA
+      html += '<div class="cta">';
+      html += '<h2 class="cta__heading">Want the full breakdown?</h2>';
+      html += '<p class="cta__text">We put together a detailed remediation roadmap with code-level fixes your team can act on. No pressure, no obligation.</p>';
+      html += '<a href="https://simplyblackandwhite.com/#contact" class="cta__btn">Book a Free Consultation</a>';
+      html += '</div>';
+
+      container.innerHTML = html;
+    }
+
+    function esc(str) { var d = document.createElement('div'); d.appendChild(document.createTextNode(str || '')); return d.innerHTML; }
+  })();
+  </script>
+
+  <footer class="footer">
+    <p>Simply Black and White · simplyblackandwhite.com</p>
+  </footer>
+</body>
+</html>

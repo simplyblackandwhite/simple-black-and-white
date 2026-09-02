@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- @@include('../views/partials/head.html') -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Simply Black and White — Web Accessibility & AEO Consultancy</title>
+  <meta name="description" content="Simply Black and White provides web accessibility audits, digital accessibility remediation, and Answer Engine Optimization (AEO) consultancy. We make the web open to everyone." />
+  <meta name="keywords" content="web accessibility, website accessibility, WCAG, digital accessibility, AEO, answer engine optimization, accessibility audit, accessibility consultancy" />
+  <meta name="author" content="Simply Black and White" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://simplyblackandwhite.com/" />
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png" />
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://simplyblackandwhite.com/" />
+  <meta property="og:title" content="Simply Black and White — Web Accessibility & AEO" />
+  <meta property="og:description" content="We provide web accessibility audits, digital accessibility remediation, and AEO consultancy. Friendly, zero-judgment, and results-driven." />
+  <meta property="og:image" content="https://simplyblackandwhite.com/images/og-image.png" />
+  <meta property="og:site_name" content="Simply Black and White" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Simply Black and White — Web Accessibility & AEO Consultancy" />
+  <meta name="twitter:description" content="We provide web accessibility audits, digital accessibility remediation, and AEO consultancy." />
+  <meta name="theme-color" content="#F7F7F5" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Simply Black and White",
+    "url": "https://simplyblackandwhite.com",
+    "description": "Simply Black and White provides web accessibility audits, digital accessibility remediation, and Answer Engine Optimization consultancy. We make the web open to everyone.",
+    "address": { "@type": "PostalAddress", "addressCountry": "US" },
+    "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "email": "hello@simplyblackandwhite.com" },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Accessibility & AEO Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "The Clear View Audit", "description": "We provide a comprehensive web accessibility audit with a full scan report, human barrier breakdown, AEO citation check, and prioritized developer checklist." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "The Clean Slate Orchestration", "description": "We provide full architectural orchestration with developer-ready workbooks and remediation roadmaps for your agency or internal team." } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "The Always Open Guardian", "description": "We provide continuous accessibility monitoring, recurring re-scans, AEO citation tracking, and quarterly compliance tune-ups." } }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ─── Site Header ──────────────────────────────────────── -->
+  <header class="site-header" role="banner">
+    <div class="container site-header__inner">
+      <a href="/" class="site-logo" aria-label="Simply Black and White — Home">
+        Simply Black and White
+        <span class="site-logo__tagline">Accessibility · AEO</span>
+      </a>
+      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation menu">
+        Menu
+      </button>
+      <nav aria-label="Primary navigation">
+        <ul class="site-nav" id="primary-nav" role="list">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why-accessibility">Why Accessibility</a></li>
+          <li><a href="#scan">Free Scan</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact" class="btn btn--primary btn--sm">Book a Consultation</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ─── Main Content ─────────────────────────────────────── -->
+  <main id="main-content" aria-label="Main content">
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 1 — HERO
+         ═══════════════════════════════════════════════════════ -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <h1 class="hero__heading" id="hero-heading">
+            Your website works for<br />
+            <em>everyone.</em> We make sure of it.
+          </h1>
+          <p class="hero__subheading">
+            We provide web accessibility audits, digital accessibility remediation,
+            and Answer Engine Optimization consultancy — without the intimidation,
+            the jargon, or the judgment. Because your site's barriers were almost
+            certainly not your fault to begin with.
+          </p>
+          <div class="hero__actions">
+            <a href="#scan" class="btn btn--primary btn--lg">Scan My Website Free</a>
+            <a href="#services" class="btn btn--primary btn--lg">See Our Services</a>
+          </div>
+          <div class="hero__trust" role="list" aria-label="Trust indicators">
+            <div role="listitem">
+              <a href="https://www.w3.org/WAI/WCAG2AAA-Conformance" target="_blank" rel="noopener" class="hero__trust-item" aria-label="WCAG AAA Aligned — our site meets the highest web accessibility standard. Opens W3C page in new tab.">
+                <span class="hero__trust-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+                </span>
+                <span>WCAG AAA Aligned</span>
+              </a>
+            </div>
+            <div role="listitem">
+              <a href="https://www.ada.gov/topics/title-ii/" target="_blank" rel="noopener" class="hero__trust-item" aria-label="Department of Justice Title II Ready — we meet federal web accessibility requirements. Opens ADA.gov in new tab.">
+                <span class="hero__trust-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+                </span>
+                <span>Department of Justice Title II Ready</span>
+              </a>
+            </div>
+            <div role="listitem">
+              <span class="hero__trust-item hero__trust-item--fun" tabindex="0" aria-label="Zero Judgment Approach — we blame the template, not you">
+                <span class="hero__trust-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+                </span>
+                <span>Zero Judgment Approach</span>
+                <span class="hero__trust-tooltip" aria-hidden="true">We blame the template, not you.</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__geometric">
+            <div class="hero__geo-ring hero__geo-ring--1"></div>
+            <div class="hero__geo-ring hero__geo-ring--2"></div>
+            <div class="hero__geo-ring hero__geo-ring--3"></div>
+            <div class="hero__geo-center">
+              <span class="hero__geo-text">100%</span>
+              <span class="hero__geo-sub">Accessible</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 2 — WHY ACCESSIBILITY (Plain Language)
+         ═══════════════════════════════════════════════════════ -->
+    <section class="why-accessibility" id="why-accessibility" aria-labelledby="why-heading">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge--stone">The Real Picture</span>
+          <h2 class="section-heading" id="why-heading">
+            It's not your fault.<br />But it does become your problem.
+          </h2>
+          <p class="section-subheading">
+            Most website accessibility issues stem from templates built before modern
+            standards, plugins that inject inaccessible code, or agencies that simply
+            didn't prioritize it. You inherited the problem. We help you fix it.
+          </p>
+        </div>
+
+        <div class="why-grid">
+          <article class="why-card" aria-labelledby="why-human-heading">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="20" cy="20" r="19" stroke="#000" stroke-width="2"/>
+                <circle cx="20" cy="15" r="5" stroke="#000" stroke-width="2"/>
+                <path d="M10 32c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 id="why-human-heading">1 in 4 adults in the US lives with a disability.</h3>
+            <p>
+              That's over 61 million people who encounter barriers on inaccessible websites
+              every single day. When your site can't be navigated by keyboard, read by a
+              screen reader, or understood by someone with cognitive differences, you're
+              closing the door on a quarter of your potential customers.
+            </p>
+          </article>
+
+          <article class="why-card" aria-labelledby="why-legal-heading">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">
+                <rect x="1" y="1" width="38" height="38" rx="4" stroke="#000" stroke-width="2"/>
+                <path d="M10 20h20M10 13h20M10 27h12" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 id="why-legal-heading"><abbr title="Americans with Disabilities Act">ADA</abbr> lawsuits are at an all-time high.</h3>
+            <p>
+              The Department of Justice's Title II rule now applies to state and local
+              government websites, and courts continue to extend ADA protections to
+              commercial web properties. Accessibility isn't a courtesy — it's legal
+              infrastructure. We help you get ahead of it before a demand letter arrives.
+            </p>
+          </article>
+
+          <article class="why-card" aria-labelledby="why-aeo-heading">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="20" cy="20" r="19" stroke="#000" stroke-width="2"/>
+                <path d="M20 10v10l7 4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 id="why-aeo-heading"><abbr title="Artificial Intelligence">AI</abbr> search engines can't cite what they can't read.</h3>
+            <p>
+              ChatGPT, Perplexity, and Google AI Overviews parse your site's structure
+              to decide if you're a credible source worth recommending. "Div soup" —
+              pages built with no semantic landmarks — is invisible to these systems.
+              Clean, accessible code is the same code that gets your business cited as
+              an authoritative answer.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 3 — SERVICES (Three Tiers)
+         ═══════════════════════════════════════════════════════ -->
+    <section class="services" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge--stone">Our Services</span>
+          <h2 class="section-heading" id="services-heading">
+            Three ways we work with you.
+          </h2>
+          <p class="section-subheading">
+            Whether you need a clear picture, a full remediation plan, or an
+            ongoing compliance partner — we have a path that fits where you are.
+          </p>
+        </div>
+
+        <div class="services-grid">
+
+          <article class="service-card" aria-labelledby="tier1-heading">
+            <div class="service-card__tier" aria-hidden="true">Tier 1</div>
+            <h3 class="service-card__heading" id="tier1-heading">
+              The "Clear View" Audit
+            </h3>
+            <p class="service-card__price">Comprehensive audit report</p>
+            <p class="service-card__desc">
+              We deliver a comprehensive accessibility audit with a full scan report,
+              plain-language human barrier breakdown, AEO citation health check, and
+              a prioritized developer checklist your team can act on immediately.
+            </p>
+            <ul class="service-card__list" role="list" aria-label="Clear View Audit features">
+              <li>Full automated + manual scan report</li>
+              <li>Complete accessibility issue breakdown</li>
+              <li>Plain-language fix recommendations</li>
+              <li>AEO citation readiness check</li>
+              <li>Prioritized developer checklist</li>
+              <li>PDF deliverable within 3–5 business days</li>
+            </ul>
+            <a href="#scan" class="btn btn--secondary">Get Your Free Scan First</a>
+          </article>
+
+          <article class="service-card service-card--featured" aria-labelledby="tier2-heading">
+            <div class="service-card__badge">Recommended for most businesses</div>
+            <div class="service-card__tier" aria-hidden="true">Tier 2</div>
+            <h3 class="service-card__heading" id="tier2-heading">
+              The "Clean Slate" Orchestration
+            </h3>
+            <p class="service-card__price">Custom project scope</p>
+            <p class="service-card__desc">
+              We act as your master accessibility architect — producing developer-ready
+              workbooks and remediation roadmaps your agency or internal team can execute
+              directly, with zero guesswork and no interpretation required.
+            </p>
+            <ul class="service-card__list" role="list">
+              <li>Everything in The Clear View Audit</li>
+              <li>Full developer-ready remediation workbook</li>
+              <li>Code-level fix specifications per issue</li>
+              <li>Platform &amp; template-specific guidance</li>
+              <li>AEO structured data recommendations</li>
+              <li>One review call included</li>
+            </ul>
+            <a href="#scan" class="btn btn--primary">Get Your Free Scan First</a>
+          </article>
+
+          <article class="service-card" aria-labelledby="tier3-heading">
+            <div class="service-card__tier" aria-hidden="true">Tier 3</div>
+            <h3 class="service-card__heading" id="tier3-heading">
+              The "Always Open" Guardian
+            </h3>
+            <p class="service-card__price">Flexible monthly partnership</p>
+            <p class="service-card__desc">
+              We become your continuous compliance partner — running recurring scans,
+              tracking AEO citation health, and delivering quarterly tune-ups so your
+              site stays open and compliant as your content and plugins evolve.
+            </p>
+            <ul class="service-card__list" role="list">
+              <li>Monthly automated re-scans</li>
+              <li>AEO citation tracking &amp; reporting</li>
+              <li>Quarterly compliance tune-up session</li>
+              <li>Plugin &amp; update impact monitoring</li>
+              <li>Priority response on new issues</li>
+              <li>Month-to-month, no long-term contract</li>
+            </ul>
+            <a href="#scan" class="btn btn--secondary">Get Your Free Scan First</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 4 — FREE LIGHT SCAN
+         ═══════════════════════════════════════════════════════ -->
+    <section class="scan-section" id="scan" aria-labelledby="scan-heading">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge--dark">Free Instant Scan</span>
+          <h2 class="section-heading" id="scan-heading">
+            See what's blocking your visitors<br />in 60 seconds.
+          </h2>
+          <p class="section-subheading">
+            Drop your URL below. We run a real accessibility and AEO health check —
+            no email required, no strings attached. Just honest findings.
+          </p>
+        </div>
+
+        <div class="scan-box" role="region" aria-label="Website accessibility scanner">
+          <form class="scan-form" id="scan-form" novalidate aria-describedby="scan-form-desc">
+            <p id="scan-form-desc" class="sr-only">
+              Enter your website URL to receive a free accessibility and AEO snapshot report.
+            </p>
+            <div class="scan-form__row">
+              <label for="scan-url" class="sr-only">Your website URL</label>
+              <input
+                type="url"
+                id="scan-url"
+                name="url"
+                class="scan-form__input"
+                placeholder="https://yourwebsite.com"
+                autocomplete="url"
+                spellcheck="false"
+                aria-required="true"
+                aria-describedby="scan-url-hint"
+              />
+              <button type="submit" class="btn btn--primary scan-form__btn" id="scan-submit">
+                <span class="scan-form__btn-text">Scan My Site</span>
+                <span class="scan-form__btn-loading" aria-hidden="true" hidden>Scanning…</span>
+              </button>
+            </div>
+            <p id="scan-url-hint" class="scan-form__hint">
+              Include https:// — for example: https://yourbusiness.com
+            </p>
+            <div id="scan-error" class="scan-form__error" role="alert" aria-live="polite" hidden></div>
+            <!-- Progress bar -->
+            <div class="scan-progress" id="scan-progress" hidden aria-live="polite">
+              <div class="scan-progress__bar">
+                <div class="scan-progress__fill" id="scan-progress-fill"></div>
+              </div>
+              <p class="scan-progress__status" id="scan-progress-status"></p>
+            </div>
+          </form>
+
+          <!-- Results panel — hidden until scan completes -->
+          <div class="scan-results" id="scan-results" aria-live="polite" aria-atomic="true" hidden>
+            <div class="scan-results__header">
+              <h3 class="scan-results__title">Your Accessibility Snapshot</h3>
+              <span class="scan-results__url" id="scan-results-url"></span>
+            </div>
+
+            <div class="scan-results__grid">
+              <div class="scan-results__col">
+                <h4 class="scan-results__col-heading">
+                  <span aria-hidden="true">⚠</span> Human Impact Risks
+                </h4>
+                <ul class="scan-results__list" id="human-risks" role="list"></ul>
+              </div>
+              <div class="scan-results__col">
+                <h4 class="scan-results__col-heading">
+                  <span aria-hidden="true">⚙</span> Technical Code Risks
+                </h4>
+                <ul class="scan-results__list" id="technical-risks" role="list"></ul>
+              </div>
+            </div>
+
+            <div class="scan-results__aeo">
+              <h4 class="scan-results__aeo-heading">AEO Health Snapshot</h4>
+              <div class="scan-results__aeo-body" id="aeo-snapshot"></div>
+            </div>
+
+            <div class="scan-results__cta">
+              <div class="scan-email-capture" id="scan-email-capture">
+                <p class="scan-email-capture__text">Get the full breakdown sent to your inbox — your score, top issues, and what to fix first.</p>
+                <form class="scan-email-capture__form" id="scan-email-form" novalidate>
+                  <input type="email" id="scan-email-input" class="scan-email-capture__input" placeholder="your@email.com" aria-label="Your email address" required />
+                  <button type="submit" class="btn btn--primary scan-email-capture__btn" id="scan-email-btn">Send My Report</button>
+                </form>
+                <p class="scan-email-capture__success" id="scan-email-success" hidden>Check your inbox — your accessibility snapshot is on its way.</p>
+                <p class="scan-email-capture__note">No spam, ever. Just your report.</p>
+              </div>
+              <p style="margin-top: var(--space-4);">Want the full audit with code-level fixes and a quote?</p>
+              <a href="#contact" class="btn btn--secondary">Book a Free Consultation</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- How it works -->
+        <div class="scan-how" aria-labelledby="how-heading">
+          <h3 class="scan-how__heading" id="how-heading">How the scan works</h3>
+          <ol class="scan-how__steps" role="list" aria-label="How the scan works steps">
+            <li class="scan-how__step">
+              <span class="scan-how__step-num" aria-hidden="true">1</span>
+              <div>
+                <strong>You submit your URL.</strong> We validate it and check that the
+                page is publicly reachable.
+              </div>
+            </li>
+            <li class="scan-how__step">
+              <span class="scan-how__step-num" aria-hidden="true">2</span>
+              <div>
+                <strong>We load your rendered page.</strong> A headless browser loads
+                your full site — including JavaScript — exactly as a real visitor sees it.
+              </div>
+            </li>
+            <li class="scan-how__step">
+              <span class="scan-how__step-num" aria-hidden="true">3</span>
+              <div>
+                <strong>We run the analysis.</strong> axe-core evaluates WCAG compliance
+                while our AEO engine checks semantic structure and schema markup.
+              </div>
+            </li>
+            <li class="scan-how__step">
+              <span class="scan-how__step-num" aria-hidden="true">4</span>
+              <div>
+                <strong>You get honest findings.</strong> No sales fluff — just the top
+                issues that affect real people and your AI search visibility.
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 5 — THE COMPLIANT CAFFEINE CALCULATOR
+         ═══════════════════════════════════════════════════════ -->
+    <section class="drink-section" id="drink-generator" aria-labelledby="drink-heading">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge--taupe">A Little Gift</span>
+          <h2 class="section-heading" id="drink-heading">
+            The Compliant Caffeine Calculator
+          </h2>
+          <p class="section-subheading">
+            Thanks for visiting. Here's a custom drink recipe made just for you —
+            a unique mix no one's ordered before. Take it to your next coffee run.
+            Our treat, no strings attached.
+          </p>
+        </div>
+
+        <div class="drink-generator" role="region" aria-label="Compliant Caffeine Calculator">
+          <!-- Category picker -->
+          <fieldset class="drink-category" aria-describedby="drink-category-desc">
+            <legend class="drink-category__legend">Choose your base:</legend>
+            <p id="drink-category-desc" class="sr-only">Select a drink category to generate your compliant caffeine order.</p>
+            <div class="drink-category__options">
+              <label class="drink-option">
+                <input type="radio" name="drink-category" value="coffee" checked />
+                <span class="drink-option__card" aria-hidden="true">
+                  <span class="drink-option__icon">☕</span>
+                  <span class="drink-option__label">Coffee / Espresso</span>
+                </span>
+                <span class="sr-only">Coffee / Espresso</span>
+              </label>
+              <label class="drink-option">
+                <input type="radio" name="drink-category" value="tea" />
+                <span class="drink-option__card" aria-hidden="true">
+                  <span class="drink-option__icon">🍵</span>
+                  <span class="drink-option__label">Tea / Matcha</span>
+                </span>
+                <span class="sr-only">Tea / Matcha</span>
+              </label>
+              <label class="drink-option">
+                <input type="radio" name="drink-category" value="juice" />
+                <span class="drink-option__card" aria-hidden="true">
+                  <span class="drink-option__icon">🧃</span>
+                  <span class="drink-option__label">Fresh Juice / Refreshers</span>
+                </span>
+                <span class="sr-only">Fresh Juice / Refreshers</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <button
+            class="btn btn--primary btn--lg drink-generate-btn"
+            id="drink-generate"
+            type="button"
+            aria-controls="drink-result"
+          >
+            Brew Me Something No One's Made Before
+          </button>
+
+          <!-- Result card -->
+          <div
+            class="drink-result"
+            id="drink-result"
+            role="region"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label="Your generated drink order"
+            tabindex="-1"
+            hidden
+          >
+            <div class="drink-result__card">
+              <div class="drink-result__emoji" id="drink-emoji" aria-hidden="true"></div>
+              <h3 class="drink-result__name" id="drink-name">Your drink is brewing...</h3>
+              <p class="drink-result__recipe" id="drink-recipe"></p>
+              <div class="drink-result__divider" aria-hidden="true"></div>
+              <p class="drink-result__pun" id="drink-pun"></p>
+              <button
+                class="btn btn--ghost btn--sm drink-regenerate"
+                id="drink-regenerate"
+                type="button"
+                aria-label="Generate another drink order"
+              >
+                ↺ Another one
+              </button>
+              <button
+                class="btn btn--ghost btn--sm drink-save"
+                id="drink-save"
+                type="button"
+                aria-label="Save your recipe as a branded card"
+              >
+                Save My Brew
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 6 — ABOUT
+         ═══════════════════════════════════════════════════════ -->
+    <section class="about-section" id="about" aria-labelledby="about-heading">
+      <div class="container about-section__inner">
+        <div class="about-section__content">
+          <span class="badge badge--stone">About Us</span>
+          <h2 class="section-heading" id="about-heading">
+            We're the ally your<br />last agency wasn't.
+          </h2>
+          <p>
+            Simply Black and White exists because most accessibility conversations
+            start with blame. We don't do that. We understand that the gap between
+            an inaccessible site and a compliant one is almost always the result of
+            inherited code, template limitations, and third-party plugins — not
+            intentional neglect.
+          </p>
+          <p>
+            Our approach is simple: we tell you exactly what's broken, why it matters
+            to real human beings, and precisely what needs to change. Then we hand
+            that roadmap to your team in a format they can actually use — no decoder
+            ring required.
+          </p>
+          <p>
+            We also think about the future of search. The same clean, semantic code
+            that makes your site accessible to a screen reader is the code that makes
+            your business visible to AI search engines. Accessibility and AEO are
+            two sides of the same coin.
+          </p>
+        </div>
+        <div class="about-section__visual" aria-hidden="true">
+          <div class="about-section__values-side" role="list" aria-label="Our core values">
+            <div class="about-value" role="listitem">
+              <strong>Accessible by Design</strong>
+              <p>We champion inclusive experiences for everyone, everywhere.</p>
+            </div>
+            <div class="about-value" role="listitem">
+              <strong>Compliant in Practice</strong>
+              <p>We guide you through accessibility and AEO with confidence.</p>
+            </div>
+            <div class="about-value" role="listitem">
+              <strong>Focused on Impact</strong>
+              <p>Strategic solutions that remove barriers and drive real results.</p>
+            </div>
+            <div class="about-value" role="listitem">
+              <strong>Inclusive in Approach</strong>
+              <p>Accessibility is not optional. It's essential.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 7 — CONTACT / CTA
+         ═══════════════════════════════════════════════════════ -->
+    <section class="contact-section" id="contact" aria-labelledby="contact-heading" tabindex="-1">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-form-wrap">
+            <form
+              class="contact-form"
+              id="contact-form"
+              novalidate
+              aria-label="Get in touch"
+            >
+              <div class="form-group">
+                <label for="contact-email">Email Address <span aria-hidden="true">*</span></label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  autocomplete="email"
+                  aria-required="true"
+                  placeholder="you@yourbusiness.com"
+                />
+              </div>
+              <div class="form-group">
+                <label for="contact-website">Website URL <span aria-hidden="true">*</span></label>
+                <input
+                  type="url"
+                  id="contact-website"
+                  name="website"
+                  autocomplete="url"
+                  aria-required="true"
+                  placeholder="https://thewebsiteinquestion.com"
+                />
+              </div>
+              <div class="form-group">
+                <label for="contact-service">What are you looking for?</label>
+                <select id="contact-service" name="service">
+                  <option value="">— Select an option —</option>
+                  <option value="tier1">An accessibility audit (The Clear View)</option>
+                  <option value="tier2">A remediation plan (The Clean Slate)</option>
+                  <option value="tier3">Ongoing monitoring (The Always Open Guardian)</option>
+                  <option value="aeo">AEO / AI search optimization</option>
+                  <option value="unsure">Not sure yet — help me figure it out</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-message">Tell us what you're trying to do</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows="4"
+                  placeholder="My site was built by an agency three years ago and I just learned about accessibility..."
+                ></textarea>
+              </div>
+              <!-- Honeypot -->
+              <div class="form-group" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden;">
+                <label for="contact-company">Company</label>
+                <input type="text" id="contact-company" name="company" tabindex="-1" autocomplete="off" />
+              </div>
+              <p class="contact-form__legal">
+                By submitting this form, you accept our <a href="/terms">terms of service</a> and <a href="/privacy">privacy policy</a>.
+              </p>
+              <button type="submit" class="btn btn--primary btn--lg contact-form__submit">
+                Get in Touch
+              </button>
+              <div id="contact-status" role="status" aria-live="polite" class="contact-form__status" hidden></div>
+            </form>
+          </div>
+
+          <div class="contact-aside">
+            <h2 class="contact-aside__heading" id="contact-heading">Talk to us about your website's accessibility</h2>
+            <ul class="contact-aside__list" role="list">
+              <li>
+                <span class="contact-aside__icon" aria-hidden="true">✓</span>
+                <span>Get a clear picture of where your site stands — no judgment, no jargon</span>
+              </li>
+              <li>
+                <span class="contact-aside__icon" aria-hidden="true">✓</span>
+                <span>Receive a plain-language action plan your team can actually use</span>
+              </li>
+              <li>
+                <span class="contact-aside__icon" aria-hidden="true">✓</span>
+                <span>Understand how accessibility improvements boost your AI search visibility</span>
+              </li>
+            </ul>
+            <div class="contact-aside__proof">
+              <p><strong>This site is our proof.</strong></p>
+              <p>Every contrast ratio, focus state, and landmark you see here is deliberate. We build what we sell.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /#main-content -->
+
+  <!-- ─── Site Footer ──────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <a href="/" class="site-logo" aria-label="Simply Black and White — Home">Simply Black and White</a>
+          <p class="site-footer__tagline">Web Accessibility · Digital Compliance · AEO Consultancy.</p>
+          <p class="site-footer__tagline" style="margin-top:0.75rem;">We make the web open to everyone — no judgment, just results.</p>
+        </div>
+        <nav aria-label="Services footer navigation">
+          <p class="site-footer__nav-heading">Services</p>
+          <ul class="site-footer__nav" role="list">
+            <li><a href="#services">The Clear View Audit</a></li>
+            <li><a href="#services">The Clean Slate Orchestration</a></li>
+            <li><a href="#services">The Always Open Guardian</a></li>
+            <li><a href="#scan">Free Site Scan</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Company footer navigation">
+          <p class="site-footer__nav-heading">Company</p>
+          <ul class="site-footer__nav" role="list">
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#why-accessibility">Why Accessibility</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Legal footer navigation">
+          <p class="site-footer__nav-heading">Legal</p>
+          <ul class="site-footer__nav" role="list">
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/accessibility">Accessibility Statement</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="site-footer__bottom">
+        <p class="site-footer__legal">
+          <strong>Disclaimer:</strong> Simply Black and White provides expert risk mitigation, code restructuring,
+          and architectural guidance. We do not guarantee permanent 100% compliance, as website code changes
+          continuously through third-party plugins, template updates, and client-uploaded content.
+        </p>
+        <p class="site-footer__copyright">
+          &copy; <span id="footer-year"></span> Simply Black and White. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/drink-generator.js" defer></script>
+  <script src="/js/light-scan.js" defer></script>
+
+  <!-- Nav toggle & footer year — inline, zero deps -->
+  <script>
+    // Mobile nav toggle
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('primary-nav');
+      if (!toggle || !nav) return;
+      toggle.addEventListener('click', function () {
+        var isOpen = nav.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        toggle.textContent = isOpen ? 'Close' : 'Menu';
+      });
+      document.addEventListener('keydown', function (e) {
+        // Don't interfere with form inputs
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+          nav.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open navigation menu');
+          toggle.textContent = 'Menu';
+          toggle.focus();
+        }
+      });
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open navigation menu');
+          toggle.textContent = 'Menu';
+        });
+      });
+    })();
+
+    // Footer year
+    var fy = document.getElementById('footer-year');
+    if (fy) fy.textContent = new Date().getFullYear();
+
+    // Scroll reveal for why-cards
+    (function () {
+      var cards = document.querySelectorAll('.why-card');
+      if (!cards.length || !('IntersectionObserver' in window)) {
+        // Fallback: just show them
+        cards.forEach(function (c) { c.classList.add('is-visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      cards.forEach(function (card) { observer.observe(card); });
+    })();
+
+    // Focus management for anchor links to contact section
+    (function () {
+      var contactLinks = document.querySelectorAll('a[href="#contact"]');
+      contactLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          setTimeout(function () {
+            var firstInput = document.getElementById('contact-name');
+            if (firstInput) firstInput.focus();
+          }, 300);
+        });
+      });
+    })();
+
+    // Contact form submission
+    var contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var status = document.getElementById('contact-status');
+        var submitBtn = contactForm.querySelector('.contact-form__submit');
+        var formData = {
+          name: 'Website Inquiry',
+          email: contactForm.querySelector('#contact-email').value,
+          website: contactForm.querySelector('#contact-website').value,
+          service: contactForm.querySelector('#contact-service').value,
+          message: contactForm.querySelector('#contact-message').value,
+          company: contactForm.querySelector('#contact-company') ? contactForm.querySelector('#contact-company').value : '',
+        };
+
+        if (!formData.email) {
+          if (status) {
+            status.hidden = false;
+            status.className = 'contact-form__status contact-form__status--error';
+            status.textContent = 'Please enter your email address.';
+          }
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Get in Touch';
+            if (status) {
+              status.hidden = false;
+              if (data.success) {
+                status.className = 'contact-form__status contact-form__status--success';
+                status.textContent = data.message;
+                contactForm.reset();
+              } else {
+                status.className = 'contact-form__status contact-form__status--error';
+                status.textContent = data.error || 'Something went wrong. Please try again.';
+              }
+            }
+          })
+          .catch(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Get in Touch';
+            if (status) {
+              status.hidden = false;
+              status.className = 'contact-form__status contact-form__status--error';
+              status.textContent = 'Network error. Please try again.';
+            }
+          });
+      });
+    }
+  </script>
+
+</body>
+</html>

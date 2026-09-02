@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Accessibility Fixer — Simply Black and White</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/scanner.css" />
+  <link rel="stylesheet" href="/css/fixer.css" />
+</head>
+<body class="dash-body">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="dash-header" role="banner">
+    <div class="container dash-header__inner">
+      <a href="/scanner" class="dash-header__logo" aria-label="Back to Nightwolf Dashboard">
+        Simply Black and White
+        <span class="dash-header__logo-label">Nightwolf · Fixer</span>
+      </a>
+      <nav class="fixer-nav" aria-label="Tool navigation">
+        <a href="/scanner" class="fixer-nav__link">Dashboard</a>
+        <a href="/scanner/fixer" class="fixer-nav__link fixer-nav__link--active">Fixer</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main id="main-content" class="fixer-main">
+    <div class="container">
+
+      <div class="fixer-hero">
+        <h1 class="fixer-hero__title">Accessibility Fixer</h1>
+        <p class="fixer-hero__subtitle">Paste non-compliant HTML, get back fixed code with an explanation of what changed and why.</p>
+      </div>
+
+      <!-- Input Section -->
+      <div class="fixer-workspace">
+        <div class="fixer-input-panel">
+          <div class="fixer-input-panel__header">
+            <h2 class="fixer-input-panel__title">Input</h2>
+            <select id="fixer-rule" class="fixer-input-panel__select" aria-label="Issue type">
+              <option value="">Auto-detect issue</option>
+              <optgroup label="Common Issues">
+                <option value="image-alt">Missing alt text (image-alt)</option>
+                <option value="color-contrast">Color contrast (color-contrast)</option>
+                <option value="link-name">Link without name (link-name)</option>
+                <option value="button-name">Button without name (button-name)</option>
+                <option value="label">Form field missing label (label)</option>
+                <option value="heading-order">Heading order (heading-order)</option>
+                <option value="html-has-lang">Missing lang attribute (html-has-lang)</option>
+                <option value="document-title">Missing page title (document-title)</option>
+                <option value="bypass">No skip navigation (bypass)</option>
+                <option value="landmark-one-main">No main landmark (landmark-one-main)</option>
+              </optgroup>
+              <optgroup label="Structure & ARIA">
+                <option value="region">Content outside landmark (region)</option>
+                <option value="aria-hidden-focus">Hidden but focusable (aria-hidden-focus)</option>
+                <option value="aria-allowed-role">Invalid role (aria-allowed-role)</option>
+                <option value="aria-prohibited-attr">Prohibited ARIA attribute (aria-prohibited-attr)</option>
+                <option value="nested-interactive">Nested interactive elements (nested-interactive)</option>
+              </optgroup>
+              <optgroup label="Other">
+                <option value="meta-viewport">Viewport prevents zoom (meta-viewport)</option>
+                <option value="frame-title">Frame missing title (frame-title)</option>
+                <option value="empty-heading">Empty heading (empty-heading)</option>
+                <option value="select-name">Select missing label (select-name)</option>
+                <option value="list">Invalid list structure (list)</option>
+              </optgroup>
+            </select>
+          </div>
+          <textarea
+            id="fixer-input"
+            class="fixer-input-panel__textarea"
+            placeholder="Paste your HTML code here...
+
+Example:
+<img src=&quot;hero.jpg&quot;>
+<a href=&quot;/about&quot;></a>
+<div onclick=&quot;doSomething()&quot;>Click me</div>"
+            spellcheck="false"
+            aria-label="HTML code input"
+          ></textarea>
+          <div class="fixer-input-panel__footer">
+            <button class="btn btn--primary" id="fixer-submit">Fix This Code</button>
+            <button class="btn btn--secondary" id="fixer-clear">Clear</button>
+          </div>
+        </div>
+
+        <!-- Output Section -->
+        <div class="fixer-output-panel" id="fixer-output-panel" hidden>
+          <div class="fixer-output-panel__header">
+            <h2 class="fixer-output-panel__title">Fixed Code</h2>
+            <button class="btn btn--secondary btn--sm" id="fixer-copy">Copy Code</button>
+          </div>
+          <pre class="fixer-output-panel__code" id="fixer-output-code"></pre>
+
+          <div class="fixer-output-panel__explanation" id="fixer-explanation">
+            <h3 class="fixer-output-panel__explanation-title">What Changed</h3>
+            <div id="fixer-explanation-text"></div>
+          </div>
+
+          <div class="fixer-output-panel__meta" id="fixer-meta"></div>
+        </div>
+
+        <!-- Loading state -->
+        <div class="fixer-loading" id="fixer-loading" hidden>
+          <p>Analyzing and fixing your code...</p>
+        </div>
+
+        <!-- Error state -->
+        <div class="fixer-error" id="fixer-error" hidden role="alert"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="fixer-footer">
+    <div class="container">
+      <p class="fixer-footer__brand">Simply Black and White</p>
+      <p class="fixer-footer__tagline">Accessibility · AEO Consultancy</p>
+    </div>
+  </footer>
+
+  <script src="/js/fixer.js" defer></script>
+</body>
+</html>
