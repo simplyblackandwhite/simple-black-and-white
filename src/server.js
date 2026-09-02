@@ -56,6 +56,9 @@ const scanLimiter = rateLimit({
   max: 10,
   standardHeaders: true,
   legacyHeaders: false,
+  // Railway sits behind a proxy; trust proxy is set intentionally. Disable the
+  // X-Forwarded-For validation so the limiter doesn't 500 on custom-domain requests.
+  validate: { xForwardedForHeader: false, trustProxy: false },
   message: { error: 'Too many scan requests. Please wait a few minutes and try again.' },
 });
 
@@ -64,6 +67,7 @@ const generalLimiter = rateLimit({
   max: 100,
   standardHeaders: true,
   legacyHeaders: false,
+  validate: { xForwardedForHeader: false, trustProxy: false },
 });
 
 app.use(generalLimiter);
