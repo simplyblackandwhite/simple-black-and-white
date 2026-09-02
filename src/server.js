@@ -24,6 +24,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const DB_PATH = process.env.DB_PATH || path.join(__dirname, '../data/sbw.db');
 
+// Trust the reverse proxy (Railway/production) so secure cookies work behind HTTPS termination.
+// Without this, Express sees HTTP internally and refuses to set the secure session cookie,
+// causing OAuth login to bounce back to the login screen.
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
+
 // ─── Security Middleware ───────────────────────────────────────────────────────
 app.use(
   helmet({
