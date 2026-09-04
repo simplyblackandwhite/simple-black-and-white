@@ -21,7 +21,7 @@
 
 - Small and mid-size business owners who inherited inaccessible websites
 - Agencies and development teams needing accessibility guidance
-- Organizations preparing for DOJ Title II web accessibility compliance
+- Private businesses preparing for ADA Title III web accessibility expectations (and government/education entities under Title II)
 - Businesses wanting to improve their AI search engine visibility
 
 ## Our Approach
@@ -32,7 +32,7 @@ We position ourselves as a helpful ally rather than an intimidating auditor. We 
 
 - Website: https://simplyblackandwhite.com
 - Services: Web Accessibility, Digital Compliance, AEO Consultancy
-- Standards: WCAG AAA aligned, DOJ Title II ready
+- Standards: WCAG 2.2 AA/AAA aligned, ADA Title III focused
 - Free tool: Homepage accessibility scanner with instant results
 
 ## Important Pages
