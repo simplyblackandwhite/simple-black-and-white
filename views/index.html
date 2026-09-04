@@ -51,6 +51,55 @@
     }
   }
   </script>
+  <!-- FAQPage Schema — enables AI engines and search to surface these Q&As -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does my small business website need to be ADA compliant?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most private businesses that serve the public fall under ADA Title III, and courts have increasingly applied it to websites. (ADA Title II is separate — it covers state and local government entities like schools, courts, and public agencies.) While there is no single federal regulation specifying exact technical requirements for private businesses, the Web Content Accessibility Guidelines (WCAG) 2.1 and 2.2 Level AA are the widely accepted standard courts reference. Making your site accessible reduces legal risk and opens your business to more customers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if my website fails an accessibility audit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A failed audit is not a penalty — it is a starting point. It identifies the specific barriers preventing some visitors from using your site. The real risk comes from ignoring known issues: businesses with inaccessible websites can face demand letters or lawsuits under the ADA. The practical response is to prioritize issues by severity and remediate them, starting with barriers that completely block access."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is AEO and why does it matter for my business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AEO stands for Answer Engine Optimization. It is the practice of structuring your website content so that AI-powered search engines — like ChatGPT, Perplexity, and Google's AI Overviews — can read, understand, and recommend your business when people ask questions. As more people use AI assistants instead of traditional search, businesses with well-structured, semantic, and clearly written content are more likely to be cited in AI answers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I hire a consultant or use an accessibility overlay tool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Accessibility overlay tools — widgets that claim to make a site compliant automatically — are widely criticized by the disability community and accessibility experts. They often fail to fix underlying issues and can even introduce new barriers. Genuine accessibility comes from fixing the site's actual code and content. A consultant identifies real issues and provides real fixes, rather than masking problems with a script."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between an accessibility audit and ongoing monitoring?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An audit is a point-in-time assessment that identifies existing issues. Ongoing monitoring is continuous — it re-scans your site regularly to catch new issues that appear as you add content, update plugins, or change templates. Accessibility is not a one-time fix because websites change constantly. An audit gets you to a baseline; monitoring keeps you there."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -227,8 +276,9 @@
             Three ways we work with you.
           </h2>
           <p class="section-subheading">
-            Whether you need a clear picture, a full remediation plan, or an
-            ongoing compliance partner — we have a path that fits where you are.
+            We offer three ways to work together. Whether you need a clear picture, a
+            full remediation plan, or an ongoing compliance partner, we provide a path
+            that fits exactly where you are.
           </p>
         </div>
 
@@ -584,6 +634,65 @@
               <p>Accessibility is not optional. It's essential.</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 6.5 — FAQ (Common Questions)
+         ═══════════════════════════════════════════════════════ -->
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge--stone">Common Questions</span>
+          <h2 class="section-heading" id="faq-heading">Questions we answer every week</h2>
+          <p class="section-subheading">
+            Straight answers to what business owners ask us most. Want more?
+            <a href="/faq">Read the full FAQ</a>.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <article class="faq-item">
+            <h3>Does my small business website need to be ADA compliant?</h3>
+            <p>
+              Most private businesses that serve the public fall under ADA Title III, and
+              courts increasingly apply it to websites. (Title II is separate — it covers
+              state and local government entities like schools and courts.) We help you meet
+              WCAG 2.2 Level AA, the standard courts reference, which reduces legal risk and
+              opens your site to more customers.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h3>What is AEO, and why does it matter for my business?</h3>
+            <p>
+              AEO stands for Answer Engine Optimization. We structure your content so AI
+              search engines — ChatGPT, Perplexity, and Google's AI Overviews — read,
+              understand, and recommend your business when people ask questions. We build
+              the clean, semantic structure these systems cite as authoritative.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h3>Should I hire a consultant or use an accessibility overlay tool?</h3>
+            <p>
+              We fix the real thing. Overlay widgets patch the surface in the browser but
+              leave the underlying barriers in place, and the disability community widely
+              criticizes them. We address root causes in your code and content, so your site
+              works with every assistive technology.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h3>How is an accessibility audit different from ongoing monitoring?</h3>
+            <p>
+              An audit is a point-in-time assessment that identifies existing barriers.
+              Monitoring is continuous — we re-scan your site regularly to catch new issues
+              as you add content, update plugins, or change templates. The audit gets you to
+              a baseline; monitoring keeps you there.
+            </p>
+          </article>
         </div>
       </div>
     </section>
