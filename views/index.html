@@ -356,6 +356,72 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
+         SECTION 3.5 — HOW WE COMPARE (Comparison / vs content)
+         ═══════════════════════════════════════════════════════ -->
+    <section class="compare-section" id="compare" aria-labelledby="compare-heading">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="badge badge--stone">How We Compare</span>
+          <h2 class="section-heading" id="compare-heading">Which approach is better for your site?</h2>
+          <p class="section-subheading">
+            We help you choose the right path. Here is how real accessibility consulting
+            compares to the two most common alternatives businesses consider.
+          </p>
+        </div>
+
+        <div class="compare-grid">
+          <article class="compare-card compare-card--best">
+            <span class="compare-card__label">Real accessibility consulting</span>
+            <h3 class="compare-card__title">Simply Black and White</h3>
+            <p>
+              We fix the underlying code and content, so your site works with every
+              assistive technology. You get durable results, a clear roadmap, and honest
+              risk guidance — not a false sense of compliance.
+            </p>
+            <ul class="compare-card__list" role="list">
+              <li>Fixes root causes in real code</li>
+              <li>Works with all screen readers and keyboards</li>
+              <li>Improves AI search visibility at the same time</li>
+              <li>Transparent, human, zero-judgment</li>
+            </ul>
+          </article>
+
+          <article class="compare-card">
+            <span class="compare-card__label">Accessibility overlay widgets</span>
+            <h3 class="compare-card__title">Overlay tools vs. real fixes</h3>
+            <p>
+              Overlays apply a browser script that tries to patch issues on the surface.
+              Unlike genuine remediation, they leave the underlying barriers in place — and
+              the disability community widely criticizes them. A widget is not a substitute
+              for accessible code.
+            </p>
+            <ul class="compare-card__list" role="list">
+              <li>Patches the surface, not the source</li>
+              <li>Can introduce new barriers</li>
+              <li>Often creates a false sense of compliance</li>
+            </ul>
+          </article>
+
+          <article class="compare-card">
+            <span class="compare-card__label">Automated scan vs. expert audit</span>
+            <h3 class="compare-card__title">Automated-only tools</h3>
+            <p>
+              Automated scanners catch roughly a third of accessibility issues. The
+              difference between an automated-only check and a real audit is human context:
+              we interpret what the scan finds, prioritize by real-world impact, and tell
+              you exactly what to fix first.
+            </p>
+            <ul class="compare-card__list" role="list">
+              <li>Catches only part of the picture alone</li>
+              <li>Misses context an expert provides</li>
+              <li>We pair automation with human review</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
          SECTION 4 — FREE LIGHT SCAN
          ═══════════════════════════════════════════════════════ -->
     <section class="scan-section" id="scan" aria-labelledby="scan-heading">
@@ -438,7 +504,7 @@
               <div class="scan-email-capture" id="scan-email-capture">
                 <p class="scan-email-capture__text">Get the full breakdown sent to your inbox — your score, top issues, and what to fix first.</p>
                 <form class="scan-email-capture__form" id="scan-email-form" novalidate>
-                  <input type="email" id="scan-email-input" class="scan-email-capture__input" placeholder="your@email.com" aria-label="Your email address" required />
+                  <input type="email" id="scan-email-input" name="email" autocomplete="email" class="scan-email-capture__input" placeholder="your@email.com" aria-label="Your email address" required />
                   <button type="submit" class="btn btn--primary scan-email-capture__btn" id="scan-email-btn">Send My Report</button>
                 </form>
                 <p class="scan-email-capture__success" id="scan-email-success" hidden>Check your inbox — your accessibility snapshot is on its way.</p>

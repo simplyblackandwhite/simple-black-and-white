@@ -291,7 +291,7 @@ function getPageEvalScript() {
 
     // Present-tense detection (heuristic on paragraph text)
     var paragraphs = Array.from(doc.querySelectorAll('p, li')).slice(0, 50);
-    var presentIndicators = /\b(we provide|we offer|we help|we deliver|we build|we create|we make|we ensure|we analyze|we monitor|we guide|our team|is a|are a|specializes in|focuses on)\b/i;
+    var presentIndicators = /\b(we provide|we offer|we help|we deliver|we build|we create|we make|we ensure|we analyze|we monitor|we guide|we act|we become|we run|we tell|we hand|we understand|we champion|we fix|we address|we structure|we work|we focus|we treat|we test|we support|our team|is a|are a|is the|are the|specializes in|focuses on)\b/i;
     var pastFutureIndicators = /\b(we provided|we offered|we helped|we will|we would|we could|was a|were a|used to)\b/i;
     var presentCount = 0;
     var totalChecked = 0;

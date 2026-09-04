@@ -2412,3 +2412,52 @@ a.hero__trust-item:focus {
   margin: 0;
   color: var(--color-text);
 }
+
+/* ─── Homepage Comparison Section ────────────────────────── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+.compare-card {
+  padding: var(--space-8);
+  border: 1px solid var(--color-stone);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+}
+
+.compare-card--best {
+  border: 2px solid var(--color-black);
+  background: var(--color-ivory);
+}
+
+.compare-card__label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.compare-card__title {
+  margin: var(--space-2) 0 var(--space-3);
+  font-size: var(--text-lg);
+  color: var(--color-text-strong);
+}
+
+.compare-card p {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text);
+}
+
+.compare-card__list {
+  margin: 0;
+  padding-left: var(--space-5);
+  color: var(--color-text);
+}
+
+.compare-card__list li {
+  margin-bottom: var(--space-2);
+}
