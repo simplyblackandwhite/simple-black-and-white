@@ -7,12 +7,29 @@ const { sanitizeUrl, checkReachability } = require('../utils/sanitizer');
 const { runLightScan } = require('../scanner/engine');
 const { sendScanNotification, sendLeadNotification, sendLeadSnapshotEmail } = require('../utils/notifier');
 const { saveScan, saveLead, saveLeadWithToken, getScanById, getLeadByToken, markReportViewed, unsubscribeLead } = require('../db/database');
+const { renderWithFreshness } = require('../utils/freshness');
 
 const router = express.Router();
 
+const VIEWS_DIR = path.join(__dirname, '../../views');
+
+/**
+ * Serve a public HTML page with automated freshness dates injected.
+ * Falls back to plain static serving if rendering fails, so a page is
+ * never unavailable due to the freshness step.
+ */
+function servePage(res, fileName) {
+  const filePath = path.join(VIEWS_DIR, fileName);
+  const html = renderWithFreshness(filePath);
+  if (html === null) {
+    return res.sendFile(filePath);
+  }
+  res.type('html').send(html);
+}
+
 // ─── Homepage ─────────────────────────────────────────────────────────────────
 router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../views/index.html'));
+  servePage(res, 'index.html');
 });
 
 // ─── Health Check (used by Railway) ──────────────────────────────────────────
@@ -120,12 +137,12 @@ router.get('/accessibility', (req, res) => {
 });
 
 router.get('/faq', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../views/faq.html'));
+  servePage(res, 'faq.html');
 });
 
 // AI crawler-friendly page — minimal semantic HTML
 router.get('/ai', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../views/ai.html'));
+  servePage(res, 'ai.html');
 });
 
 // ─── Login Page ───────────────────────────────────────────────────────────────
