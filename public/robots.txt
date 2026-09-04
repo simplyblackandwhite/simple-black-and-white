@@ -1,0 +1,17 @@
+# robots.txt — Simply Black and White
+# Web Accessibility & AEO Consultancy
+
+# Allow all crawlers, including AI/answer engines.
+User-agent: *
+Allow: /
+
+# Keep the internal dashboard and auth routes out of the index.
+Disallow: /scanner
+Disallow: /login
+Disallow: /auth/
+Disallow: /api/
+
+# AI crawler descriptor (Answer Engine Optimization)
+# See /llms.txt for a plain-language overview of this business.
+
+Sitemap: https://www.simplyblackandwhite.com/sitemap.xml

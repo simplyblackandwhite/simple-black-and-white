@@ -7,7 +7,7 @@ const { sanitizeUrl, checkReachability } = require('../utils/sanitizer');
 const { runLightScan } = require('../scanner/engine');
 const { sendScanNotification, sendLeadNotification, sendLeadSnapshotEmail } = require('../utils/notifier');
 const { saveScan, saveLead, saveLeadWithToken, getScanById, getLeadByToken, markReportViewed, unsubscribeLead } = require('../db/database');
-const { renderWithFreshness } = require('../utils/freshness');
+const { renderWithFreshness, ISO_DATE } = require('../utils/freshness');
 
 const router = express.Router();
 
@@ -35,6 +35,25 @@ router.get('/', (req, res) => {
 // ─── Health Check (used by Railway) ──────────────────────────────────────────
 router.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// ─── Sitemap (auto-generated; lastmod tracks deploy date) ────────────────────
+router.get('/sitemap.xml', (req, res) => {
+  const base = 'https://www.simplyblackandwhite.com';
+  const lastmod = ISO_DATE; // deploy date, from freshness helper
+  const pages = [
+    { loc: '/', priority: '1.0', changefreq: 'weekly' },
+    { loc: '/faq', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/ai', priority: '0.6', changefreq: 'monthly' },
+    { loc: '/accessibility', priority: '0.5', changefreq: 'yearly' },
+    { loc: '/terms', priority: '0.3', changefreq: 'yearly' },
+    { loc: '/privacy', priority: '0.3', changefreq: 'yearly' },
+  ];
+  const urls = pages.map(p =>
+    `  <url>\n    <loc>${base}${p.loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${p.changefreq}</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
+  ).join('\n');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  res.type('application/xml').send(xml);
 });
 
 // ─── Google OAuth2 — Initiate Login ──────────────────────────────────────────
