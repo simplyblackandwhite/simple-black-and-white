@@ -32,6 +32,28 @@ const HUMAN_DATE = BUILD_DATE.toLocaleDateString('en-US', {
   day: 'numeric',
 });
 
+/**
+ * Verified public profiles for this business (schema.org "sameAs").
+ *
+ * This is the single source of truth for entity disambiguation — it tells
+ * Google/AI engines that this website is the same entity as these profiles,
+ * separating us from unrelated businesses with a similar name.
+ *
+ * TO ADD A PROFILE: paste the full public URL as a string in the array below.
+ * Example once ready:
+ *   'https://www.linkedin.com/company/simply-black-and-white',
+ *   'https://www.google.com/maps/place/...'  (Google Business Profile share link)
+ *
+ * The list is injected wherever the token __SAME_AS_JSON__ appears, so you
+ * only ever edit it here — every page updates automatically.
+ */
+const SAME_AS = [
+  // Add verified profile URLs here (LinkedIn, Google Business Profile, etc.)
+];
+
+// Pre-serialized JSON array string for injection into JSON-LD schema.
+const SAME_AS_JSON = JSON.stringify(SAME_AS);
+
 // In-memory cache: absolute file path -> rendered HTML string.
 const cache = new Map();
 
@@ -57,7 +79,8 @@ function renderWithFreshness(filePath) {
 
   const rendered = html
     .split('__LAST_UPDATED_ISO__').join(ISO_DATE)
-    .split('__LAST_UPDATED_HUMAN__').join(HUMAN_DATE);
+    .split('__LAST_UPDATED_HUMAN__').join(HUMAN_DATE)
+    .split('__SAME_AS_JSON__').join(SAME_AS_JSON);
 
   cache.set(filePath, rendered);
   return rendered;
@@ -68,4 +91,6 @@ module.exports = {
   ISO_DATE,
   HUMAN_DATE,
   BUILD_DATE,
+  SAME_AS,
+  SAME_AS_JSON,
 };
