@@ -22,6 +22,7 @@ function getDb() {
   }
 
   db = new Database(DB_PATH);
+  console.log('[DB] Opened database at:', path.resolve(DB_PATH), '| DB_PATH env:', process.env.DB_PATH || '(unset)');
 
   // Performance pragmas for better write performance
   db.pragma('journal_mode = WAL');
