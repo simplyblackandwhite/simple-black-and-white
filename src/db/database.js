@@ -29,6 +29,17 @@ function getDb() {
   db.pragma('synchronous = NORMAL');
   db.pragma('foreign_keys = ON');
 
+  // On Railway, containers restart across deploys while the DB lives on a
+  // persistent volume. Data written by a previous container can be stranded in
+  // the WAL file and invisible to a new connection. Checkpoint on startup to
+  // merge any pending WAL contents into the main DB file so data is never lost.
+  try {
+    const result = db.pragma('wal_checkpoint(TRUNCATE)');
+    console.log('[DB] WAL checkpoint on startup:', JSON.stringify(result));
+  } catch (e) {
+    console.error('[DB] WAL checkpoint failed:', e.message);
+  }
+
   // Run schema migration
   migrate(db);
 
@@ -86,6 +97,9 @@ function migrate(database) {
  */
 function closeDb() {
   if (db) {
+    // Flush any pending WAL data into the main DB file before closing so a
+    // container shutdown (e.g. Railway redeploy SIGTERM) never strands data.
+    try { db.pragma('wal_checkpoint(TRUNCATE)'); } catch (e) { /* best effort */ }
     db.close();
     db = null;
   }

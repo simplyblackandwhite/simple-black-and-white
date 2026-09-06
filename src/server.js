@@ -14,7 +14,7 @@ const SqliteStore = require('connect-sqlite3')(session);
 require('./auth/passport');
 
 // Initialize database
-const { getDb } = require('./db/database');
+const { getDb, closeDb } = require('./db/database');
 getDb();
 
 const publicRoutes = require('./routes/public');
@@ -148,11 +148,26 @@ app.use((err, req, res, next) => {
 });
 
 // ─── Start Server ──────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`\n✓ Simply Black and White server running`);
   console.log(`  → Local:   http://localhost:${PORT}`);
   console.log(`  → Env:     ${process.env.NODE_ENV || 'development'}`);
   console.log(`  → DB:      ${DB_PATH}\n`);
 });
+
+// ─── Graceful Shutdown ───────────────────────────────────────────────────────
+// Railway sends SIGTERM before replacing a container on deploy. Close the DB
+// (which checkpoints the WAL) so no data is stranded in the WAL file.
+function shutdown(signal) {
+  console.log(`[Server] ${signal} received — checkpointing DB and shutting down.`);
+  server.close(function () {
+    try { closeDb(); } catch (e) { /* best effort */ }
+    process.exit(0);
+  });
+  // Safety: force-exit if close hangs
+  setTimeout(function () { try { closeDb(); } catch (e) {} process.exit(0); }, 5000).unref();
+}
+process.on('SIGTERM', function () { shutdown('SIGTERM'); });
+process.on('SIGINT', function () { shutdown('SIGINT'); });
 
 module.exports = app;
