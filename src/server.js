@@ -85,8 +85,12 @@ app.use(
 );
 
 // ─── Session Store ─────────────────────────────────────────────────────────────
+// IMPORTANT: sessions live in their OWN SQLite file, separate from the app data
+// DB. Sharing one file between two different SQLite libraries (better-sqlite3
+// for data + connect-sqlite3 for sessions) causes WAL read/write consistency
+// conflicts — the app connection can get a stale/empty view of committed rows.
 const sessionStore = new SqliteStore({
-  db: 'sbw.db',
+  db: 'sessions.db',
   dir: path.dirname(DB_PATH),
   table: 'sessions',
 });
