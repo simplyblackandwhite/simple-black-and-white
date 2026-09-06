@@ -108,7 +108,14 @@
           }
         }
       })
-      .catch(function () {});
+      .catch(function (err) {
+        // Surface the failure instead of silently blanking the page.
+        console.error('[Nightwolf] Failed to load clients:', err);
+        if (clientsGrid) {
+          clientsGrid.innerHTML = '<p style="padding:var(--space-6);color:#c0392b;text-align:center;">' +
+            'Could not load clients. ' + escHtml(err && err.message ? err.message : 'Unknown error') + '</p>';
+        }
+      });
   }
 
   function renderClientCards(clients) {
