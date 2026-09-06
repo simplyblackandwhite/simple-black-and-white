@@ -428,6 +428,17 @@ function getClientsWithStats() {
   const database = getDb();
 
   const clients = database.prepare('SELECT * FROM clients ORDER BY updated_at DESC').all();
+  // TEMP DIAG: log what the LIVE server's own connection actually sees.
+  try {
+    const rawCount = database.prepare('SELECT COUNT(*) c FROM clients').get().c;
+    const scanCount = database.prepare('SELECT COUNT(*) c FROM scans').get().c;
+    const dbFile = database.pragma('database_list');
+    console.log('[DIAG getClientsWithStats] clients rows:', clients.length,
+      '| raw client count:', rawCount, '| scan count:', scanCount,
+      '| db files:', JSON.stringify(dbFile));
+  } catch (e) {
+    console.log('[DIAG getClientsWithStats] error:', e.message);
+  }
 
   return clients.map(client => {
     // Get latest scan for this domain
