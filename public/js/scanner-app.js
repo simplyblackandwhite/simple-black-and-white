@@ -896,7 +896,14 @@
     if (!ctx || !window.Chart) return;
     if (chartInstances.commonIssues) chartInstances.commonIssues.destroy();
     var top7 = commonIssues.slice(0, 7);
-    if (top7.length === 0) return;
+    var emptyEl = document.getElementById('common-issues-empty');
+    if (top7.length === 0) {
+      if (emptyEl) emptyEl.hidden = false;
+      ctx.style.display = 'none';
+      return;
+    }
+    if (emptyEl) emptyEl.hidden = true;
+    ctx.style.display = '';
     var labels = top7.map(function (i) { return truncate(i.description, 40); });
     var values = top7.map(function (i) { return i.pagesAffected; });
     var colors = ['#1A1A1A', '#4A4A4A', '#767676', '#CBB9A6', '#A09080', '#E5E5E5', '#333333'];
@@ -936,7 +943,14 @@
     if (chartInstances.issuesDepth) chartInstances.issuesDepth.destroy();
     var depthLabels = { '0': 'Homepage', '1': 'Top-level pages', '2': 'Inner pages', '3': 'Deep pages' };
     var keys = Object.keys(issuesByDepth).sort();
-    if (keys.length === 0) return;
+    var depthEmptyEl = document.getElementById('issues-depth-empty');
+    if (keys.length === 0) {
+      if (depthEmptyEl) depthEmptyEl.hidden = false;
+      ctx.style.display = 'none';
+      return;
+    }
+    if (depthEmptyEl) depthEmptyEl.hidden = true;
+    ctx.style.display = '';
     var labels = keys.map(function (k) { return depthLabels[k] || 'Depth ' + k; });
     var averages = keys.map(function (k) { return issuesByDepth[k].average; });
     // Conversational descriptions for each depth level
@@ -1091,8 +1105,12 @@
         } else {
           var s = document.getElementById('sparkline-empty');
           var t = document.getElementById('timeline-empty');
+          var sc = document.getElementById('chart-score-time');
+          var tc = document.getElementById('chart-levels-time');
           if (s) s.hidden = false;
           if (t) t.hidden = false;
+          if (sc) sc.style.display = 'none';
+          if (tc) tc.style.display = 'none';
         }
       })
       .catch(function () {});
@@ -1103,6 +1121,7 @@
     if (!ctx || !window.Chart) return;
     if (chartInstances.scoreTime) chartInstances.scoreTime.destroy();
     var s = document.getElementById('sparkline-empty'); if (s) s.hidden = true;
+    ctx.style.display = '';
     var labels = history.map(function (h) { return formatShortDate(h.created_at); });
     var scores = history.map(function (h) { return h.accessibility_score || 0; });
     chartInstances.scoreTime = new Chart(ctx, {
@@ -1117,6 +1136,7 @@
     if (!ctx || !window.Chart) return;
     if (chartInstances.levelsTime) chartInstances.levelsTime.destroy();
     var t = document.getElementById('timeline-empty'); if (t) t.hidden = true;
+    ctx.style.display = '';
     var labels = history.map(function (h) { return formatShortDate(h.created_at); });
     var accessScores = history.map(function (h) { return h.accessibility_score || 0; });
     var aeoScores = history.map(function (h) { return h.aeo_score || 0; });

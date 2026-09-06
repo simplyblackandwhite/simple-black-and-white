@@ -200,7 +200,11 @@
               <div class="overview-sparkline-card">
                 <h4 class="overview-sparkline-card__title">Score Over Time</h4>
                 <canvas id="chart-score-time" class="overview-chart-canvas" aria-label="Score over time line chart"></canvas>
-                <p class="overview-sparkline-card__empty" id="sparkline-empty" hidden>Run more scans on this domain to see trends.</p>
+                <div class="chart-empty" id="sparkline-empty" hidden>
+                  <svg class="chart-empty__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                  <p class="chart-empty__title">First data point captured</p>
+                  <p class="chart-empty__text">This is scan #1 for this domain. Run another scan later and the trend line appears here — great for showing clients progress over time.</p>
+                </div>
               </div>
             </div>
 
@@ -244,10 +248,20 @@
               <div class="overview-chart-card">
                 <h4 class="overview-chart-card__title">Most Common Issues</h4>
                 <canvas id="chart-common-issues" class="overview-chart-canvas" aria-label="Most common issues donut chart"></canvas>
+                <div class="chart-empty" id="common-issues-empty" hidden>
+                  <svg class="chart-empty__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+                  <p class="chart-empty__title">No recurring issues found</p>
+                  <p class="chart-empty__text">Nothing showed up on more than one page. That is a good sign — this chart fills in when repeated issues are detected.</p>
+                </div>
               </div>
               <div class="overview-chart-card">
                 <h4 class="overview-chart-card__title">Average Issues per Page</h4>
                 <canvas id="chart-issues-depth" class="overview-chart-canvas" aria-label="Average issues by page depth bar chart"></canvas>
+                <div class="chart-empty" id="issues-depth-empty" hidden>
+                  <svg class="chart-empty__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                  <p class="chart-empty__title">Waiting on page-depth data</p>
+                  <p class="chart-empty__text">This breaks issues down by how deep each page sits. It fills in once the scan has crawled multiple pages.</p>
+                </div>
               </div>
             </div>
 
@@ -289,7 +303,11 @@
             <div class="overview-timeline-card">
               <h4 class="overview-timeline-card__title">Levels Over Time</h4>
               <canvas id="chart-levels-time" class="overview-chart-canvas overview-chart-canvas--wide" aria-label="WCAG levels over time line chart"></canvas>
-              <p class="overview-timeline-card__empty" id="timeline-empty" hidden>Historical data will appear after multiple scans of this domain.</p>
+              <div class="chart-empty" id="timeline-empty" hidden>
+                <svg class="chart-empty__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 3 5-5"/><circle cx="7" cy="14" r="1"/><circle cx="18" cy="9" r="1"/></svg>
+                <p class="chart-empty__title">Your accessibility &amp; AEO timeline starts here</p>
+                <p class="chart-empty__text">After the next scan of this domain, this chart tracks both scores side by side so you can see improvement at a glance.</p>
+              </div>
             </div>
           </div>
 
