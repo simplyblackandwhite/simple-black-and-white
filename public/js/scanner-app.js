@@ -37,6 +37,7 @@
   var currentScanData = null;
   var currentClientId = null;
   var chartInstances = {};
+  var lastScoreHistory = [];
 
   // ─── Initialize ──────────────────────────────────────────────
   loadUser();
@@ -670,6 +671,29 @@
     activeTab.setAttribute('aria-selected', 'true');
     var panel = document.getElementById(activeTab.getAttribute('aria-controls'));
     if (panel) { panel.hidden = false; panel.classList.remove('dash-tab-panel--hidden'); }
+
+    // Charts built while their tab was hidden are born into a 0px canvas and
+    // render permanently blank — resize()/update() can't recover them. So when
+    // the Overview tab becomes visible, rebuild its charts from the stored data
+    // now that the canvas has real dimensions. (Fixes blank Overview charts.)
+    if (activeTab.getAttribute('aria-controls') === 'tab-overview') {
+      rebuildOverviewCharts();
+    }
+  }
+
+  // Rebuild the Overview charts from the current scan data once the tab is visible.
+  function rebuildOverviewCharts() {
+    if (!currentScanData) return;
+    // Defer to next frame so the browser has laid out the now-visible panel.
+    requestAnimationFrame(function () {
+      var overview = currentScanData.overview || {};
+      renderCommonIssuesChart(overview.commonIssues || []);
+      renderIssuesByDepthChart(overview.issuesByDepth || {});
+      if (lastScoreHistory && lastScoreHistory.length > 1) {
+        renderScoreTimeChart(lastScoreHistory);
+        renderLevelsTimeChart(lastScoreHistory);
+      }
+    });
   }
 
   // ═══════════════════════════════════════════════════════════════
@@ -1099,6 +1123,7 @@
     fetch('/scanner/api/scans/history/' + encodeURIComponent(domain))
       .then(function (r) { return r.json(); })
       .then(function (data) {
+        lastScoreHistory = (data.success && data.history) ? data.history : [];
         if (data.success && data.history && data.history.length > 1) {
           renderScoreTimeChart(data.history);
           renderLevelsTimeChart(data.history);

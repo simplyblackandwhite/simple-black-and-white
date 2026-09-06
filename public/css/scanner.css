@@ -604,10 +604,12 @@
 
 .overview-chart-canvas {
   width: 100% !important;
+  height: 260px !important;
   max-height: 260px;
 }
 
 .overview-chart-canvas--wide {
+  height: 200px !important;
   max-height: 200px;
 }
 
