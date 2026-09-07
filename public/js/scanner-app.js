@@ -95,9 +95,10 @@
   // ═══════════════════════════════════════════════════════════════
 
   function loadClients() {
-    fetch('/scanner/api/clients')
+    fetch('/scanner/api/clients', { credentials: 'same-origin' })
       .then(function (r) { return r.json(); })
       .then(function (data) {
+        console.log('[Nightwolf] /api/clients response:', JSON.stringify(data));
         if (data.success && data.clients && data.clients.length > 0) {
           renderClientCards(data.clients);
         } else {
