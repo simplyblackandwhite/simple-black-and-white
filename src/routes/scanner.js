@@ -28,6 +28,15 @@ function requireAuth(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
+  console.log('[Auth] BLOCKED', req.method, req.originalUrl,
+    '| hasSession:', !!req.session,
+    '| sessionID:', req.sessionID,
+    '| hasCookie:', !!(req.headers.cookie && req.headers.cookie.indexOf('sbw.sid') !== -1));
+  // For API calls, return JSON 401 instead of an HTML redirect so the frontend
+  // can detect the auth failure instead of silently failing to parse HTML.
+  if (req.originalUrl.indexOf('/api/') !== -1) {
+    return res.status(401).json({ success: false, error: 'Not authenticated.' });
+  }
   req.session.returnTo = req.originalUrl;
   res.redirect('/login');
 }
