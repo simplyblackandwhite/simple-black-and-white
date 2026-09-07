@@ -585,6 +585,7 @@ router.get('/api/me', (req, res) => {
 router.get('/api/clients', (req, res) => {
   try {
     const clients = getClientsWithStats();
+    console.log('[Scanner] /api/clients handler returning', clients.length, 'clients | authed:', req.isAuthenticated(), '| user:', req.user && req.user.email);
     res.status(200).json({ success: true, clients });
   } catch (err) {
     console.error('[Scanner] Clients error:', err.message);
