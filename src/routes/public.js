@@ -51,6 +51,17 @@ router.get('/__diag2', (req, res) => {
     out.appSeesClients = dbmod.getClientsWithStats().length;
     out.appSeesScans = dbmod.getScans(50).length;
   } catch (e) { out.err = e.message; }
+  try {
+    const fs = require('fs');
+    const cp = require('child_process');
+    const p = process.env.DB_PATH || '/data/sbw.db';
+    out.dbPath = p;
+    out.dbSize = fs.existsSync(p) ? fs.statSync(p).size : 'MISSING';
+    out.dirListing = fs.readdirSync('/data');
+    // The device/mount info as the WEB process sees it:
+    out.mounts = cp.execSync('cat /proc/mounts | grep " /data "').toString().trim();
+    out.inode = fs.existsSync(p) ? fs.statSync(p).ino : 'n/a';
+  } catch (e) { out.fsErr = e.message; }
   res.json(out);
 });
 
