@@ -594,8 +594,22 @@ router.get('/api/me', (req, res) => {
 router.get('/api/clients', (req, res) => {
   try {
     const clients = getClientsWithStats();
-    console.log('[Scanner] /api/clients handler returning', clients.length, 'clients | authed:', req.isAuthenticated(), '| user:', req.user && req.user.email);
-    res.status(200).json({ success: true, clients });
+
+    // TEMP DIAG: compare the cached-connection result with a brand-new connection
+    // to the same file, and report the actual file path, right in the response.
+    let diag = {};
+    try {
+      const Database = require('better-sqlite3');
+      const dbPath = process.env.DB_PATH || 'default';
+      const fresh = new Database(dbPath, { readonly: true });
+      const freshCount = fresh.prepare('SELECT COUNT(*) c FROM clients').get().c;
+      fresh.close();
+      diag = { cachedCount: clients.length, freshCount: freshCount, dbPath: dbPath };
+    } catch (e) {
+      diag = { diagError: e.message };
+    }
+
+    res.status(200).json({ success: true, clients, diag });
   } catch (err) {
     console.error('[Scanner] Clients error:', err.message);
     res.status(500).json({ success: false, error: 'Failed to load clients.' });
