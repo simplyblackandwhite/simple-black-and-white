@@ -22,7 +22,6 @@ function getDb() {
   }
 
   db = new Database(DB_PATH);
-  console.log('[DB] Opened database at:', path.resolve(DB_PATH), '| DB_PATH env:', process.env.DB_PATH || '(unset)');
 
   // First, merge any data stranded in an existing WAL file into the main DB.
   // (Data written under the old WAL mode may be sitting in sbw.db-wal.)
