@@ -95,10 +95,18 @@
   // ═══════════════════════════════════════════════════════════════
 
   function loadClients() {
-    fetch('/scanner/api/clients', { credentials: 'same-origin' })
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data.success && data.clients && data.clients.length > 0) {
+    fetch('/scanner/api/clients', { credentials: 'same-origin', cache: 'no-store' })
+      .then(function (r) { return r.text().then(function (t) { return { status: r.status, body: t }; }); })
+      .then(function (resp) {
+        var data = null;
+        try { data = JSON.parse(resp.body); } catch (e) {}
+        if (clientsGrid) {
+          var box = document.createElement('pre');
+          box.style.cssText = 'background:#111;color:#0f0;padding:12px;margin:8px;font:12px monospace;white-space:pre-wrap;border-radius:6px;';
+          box.textContent = 'RAW /api/clients → HTTP ' + resp.status + '\nclientsCount=' + (data && data.clients ? data.clients.length : 'n/a') + '\n' + resp.body.slice(0, 400);
+          clientsGrid.parentNode.insertBefore(box, clientsGrid);
+        }
+        if (data && data.success && data.clients && data.clients.length > 0) {
           renderClientCards(data.clients);
         } else {
           clientsGrid.innerHTML = '';
