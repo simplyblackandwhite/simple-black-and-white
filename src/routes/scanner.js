@@ -28,10 +28,6 @@ function requireAuth(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  console.log('[Auth] BLOCKED', req.method, req.originalUrl,
-    '| hasSession:', !!req.session,
-    '| sessionID:', req.sessionID,
-    '| hasCookie:', !!(req.headers.cookie && req.headers.cookie.indexOf('sbw.sid') !== -1));
   // For API calls, return JSON 401 instead of an HTML redirect so the frontend
   // can detect the auth failure instead of silently failing to parse HTML.
   if (req.originalUrl.indexOf('/api/') !== -1) {
@@ -594,25 +590,7 @@ router.get('/api/me', (req, res) => {
 router.get('/api/clients', (req, res) => {
   try {
     const clients = getClientsWithStats();
-
-    // TEMP DIAG: report exactly what the WEB process sees on /data — the real file,
-    // its size, and the directory listing — so we can compare with the Console.
-    let diag = {};
-    try {
-      const fs = require('fs');
-      const dbPath = process.env.DB_PATH || 'default';
-      const dir = require('path').dirname(dbPath);
-      const listing = fs.readdirSync(dir).map(function (f) {
-        try { const st = fs.statSync(require('path').join(dir, f)); return f + ' (' + st.size + 'b)'; }
-        catch (e) { return f + ' (?)'; }
-      });
-      const dbSize = fs.existsSync(dbPath) ? fs.statSync(dbPath).size : 'MISSING';
-      diag = { dbPath: dbPath, dbSize: dbSize, dirListing: listing, cachedCount: clients.length };
-    } catch (e) {
-      diag = { diagError: e.message };
-    }
-
-    res.status(200).json({ success: true, clients, diag });
+    res.status(200).json({ success: true, clients });
   } catch (err) {
     console.error('[Scanner] Clients error:', err.message);
     res.status(500).json({ success: false, error: 'Failed to load clients.' });

@@ -95,19 +95,10 @@
   // ═══════════════════════════════════════════════════════════════
 
   function loadClients() {
-    fetch('/scanner/api/clients', { credentials: 'same-origin', cache: 'no-store' })
-      .then(function (r) { return r.text().then(function (t) { return { status: r.status, body: t }; }); })
-      .then(function (resp) {
-        var data;
-        try { data = JSON.parse(resp.body); } catch (e) { data = null; }
-        // TEMP: show the raw response on the page so we can see exactly what the browser receives.
-        if (clientsGrid) {
-          var diag = document.createElement('div');
-          diag.style.cssText = 'padding:12px;margin:8px;background:#111;color:#0f0;font:12px monospace;white-space:pre-wrap;border-radius:6px;';
-          diag.textContent = 'DIAG /api/clients → HTTP ' + resp.status + '\n' + resp.body.slice(0, 500);
-          clientsGrid.parentNode.insertBefore(diag, clientsGrid);
-        }
-        if (data && data.success && data.clients && data.clients.length > 0) {
+    fetch('/scanner/api/clients', { credentials: 'same-origin' })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success && data.clients && data.clients.length > 0) {
           renderClientCards(data.clients);
         } else {
           clientsGrid.innerHTML = '';

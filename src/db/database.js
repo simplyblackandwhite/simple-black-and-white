@@ -24,21 +24,22 @@ function getDb() {
   db = new Database(DB_PATH);
   console.log('[DB] Opened database at:', path.resolve(DB_PATH), '| DB_PATH env:', process.env.DB_PATH || '(unset)');
 
-  // Performance pragmas for better write performance
-  db.pragma('journal_mode = WAL');
-  db.pragma('synchronous = NORMAL');
-  db.pragma('foreign_keys = ON');
-
-  // On Railway, containers restart across deploys while the DB lives on a
-  // persistent volume. Data written by a previous container can be stranded in
-  // the WAL file and invisible to a new connection. Checkpoint on startup to
-  // merge any pending WAL contents into the main DB file so data is never lost.
+  // First, merge any data stranded in an existing WAL file into the main DB.
+  // (Data written under the old WAL mode may be sitting in sbw.db-wal.)
   try {
     const result = db.pragma('wal_checkpoint(TRUNCATE)');
-    console.log('[DB] WAL checkpoint on startup:', JSON.stringify(result));
+    console.log('[DB] Startup checkpoint (merge any WAL data):', JSON.stringify(result));
   } catch (e) {
-    console.error('[DB] WAL checkpoint failed:', e.message);
+    console.error('[DB] Startup checkpoint failed:', e.message);
   }
+
+  // Use journal_mode = DELETE (not WAL). On Railway's networked volume, WAL mode
+  // causes different connections to see different data (writes stranded in the
+  // -wal file). DELETE mode writes every change directly into the main DB file,
+  // so every connection always sees the same, current data.
+  db.pragma('journal_mode = DELETE');
+  db.pragma('synchronous = FULL');
+  db.pragma('foreign_keys = ON');
 
   // Run schema migration
   migrate(db);
