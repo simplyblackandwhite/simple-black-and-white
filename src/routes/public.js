@@ -27,6 +27,33 @@ function servePage(res, fileName) {
   res.type('html').send(html);
 }
 
+// ─── TEMP diag ───────────────
+router.get('/__diag3', (req, res) => {
+  const out = {};
+  try {
+    const fs = require('fs');
+    const p = process.env.DB_PATH;
+    out.dbPath = p;
+    out.dbSize = fs.existsSync(p) ? fs.statSync(p).size : 'MISSING';
+    out.files = fs.readdirSync(require('path').dirname(p));
+    const dbmod = require('../db/database');
+    out.appClients = dbmod.getClientsWithStats().length;
+    out.appScans = dbmod.getScans(50).length;
+  } catch (e) { out.err = e.message; }
+  res.json(out);
+});
+
+// ─── TEMP diag (no auth) — remove after debugging ───────────────
+router.get('/__diag2', (req, res) => {
+  const out = { host: require('os').hostname() };
+  try {
+    const dbmod = require('../db/database');
+    out.appSeesClients = dbmod.getClientsWithStats().length;
+    out.appSeesScans = dbmod.getScans(50).length;
+  } catch (e) { out.err = e.message; }
+  res.json(out);
+});
+
 // ─── Homepage ─────────────────────────────────────────────────────────────────
 router.get('/', (req, res) => {
   servePage(res, 'index.html');
