@@ -27,28 +27,6 @@ function servePage(res, fileName) {
   res.type('html').send(html);
 }
 
-// ─── TEMP public diagnostic (no auth) — remove after debugging ───────────────
-router.get('/__diag', (req, res) => {
-  const out = {};
-  try {
-    const dbmod = require('../db/database');
-    out.getClientsWithStats = dbmod.getClientsWithStats().length;
-    out.getScans = dbmod.getScans(50).length;
-  } catch (e) { out.appConnError = e.message; }
-  try {
-    const Database = require('better-sqlite3');
-    const p = process.env.DB_PATH || 'unset';
-    out.dbPath = p;
-    const fs = require('fs');
-    out.dbSize = fs.existsSync(p) ? fs.statSync(p).size : 'MISSING';
-    out.dirListing = fs.readdirSync(require('path').dirname(p));
-    const fresh = new Database(p, { readonly: true });
-    out.freshClients = fresh.prepare('SELECT COUNT(*) c FROM clients').get().c;
-    fresh.close();
-  } catch (e) { out.freshConnError = e.message; }
-  res.json(out);
-});
-
 // ─── Homepage ─────────────────────────────────────────────────────────────────
 router.get('/', (req, res) => {
   servePage(res, 'index.html');
