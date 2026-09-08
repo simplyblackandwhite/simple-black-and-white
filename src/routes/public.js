@@ -27,6 +27,16 @@ function servePage(res, fileName) {
   res.type('html').send(html);
 }
 
+// ─── TEMP diag (no auth) — remove after debugging ───────────────
+router.get('/__diag2', (req, res) => {
+  const out = {};
+  try {
+    const dbmod = require('../db/database');
+    out.appSeesClients = dbmod.getClientsWithStats().length;
+  } catch (e) { out.err = e.message; }
+  res.json(out);
+});
+
 // ─── Homepage ─────────────────────────────────────────────────────────────────
 router.get('/', (req, res) => {
   servePage(res, 'index.html');
