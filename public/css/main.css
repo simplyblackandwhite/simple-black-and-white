@@ -843,6 +843,16 @@ hr,
   line-height: 1.1;
   margin-bottom: var(--space-6);
   text-align: center;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Scale the hero heading down on small phones so long words never overflow. */
+@media (max-width: 600px) {
+  .hero__heading {
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
+  }
 }
 
 .hero__heading em {
