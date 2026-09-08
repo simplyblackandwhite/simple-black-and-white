@@ -48,7 +48,8 @@ const HUMAN_DATE = BUILD_DATE.toLocaleDateString('en-US', {
  * only ever edit it here — every page updates automatically.
  */
 const SAME_AS = [
-  // Add verified profile URLs here (LinkedIn, Google Business Profile, etc.)
+  'https://www.linkedin.com/company/simplyblackandwhite/',
+  // Add Google Business Profile URL here once verification completes.
 ];
 
 // Pre-serialized JSON array string for injection into JSON-LD schema.

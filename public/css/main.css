@@ -860,6 +860,11 @@ hr,
   color: var(--color-text-muted);
 }
 
+/* Each sentence on its own line; "for everyone." stays bound as a unit via &nbsp; */
+.hero__heading-line {
+  display: block;
+}
+
 .hero__subheading {
   font-size: var(--text-lg);
   line-height: 1.7;
