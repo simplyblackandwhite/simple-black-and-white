@@ -595,16 +595,19 @@ router.get('/api/clients', (req, res) => {
   try {
     const clients = getClientsWithStats();
 
-    // TEMP DIAG: compare the cached-connection result with a brand-new connection
-    // to the same file, and report the actual file path, right in the response.
+    // TEMP DIAG: report exactly what the WEB process sees on /data — the real file,
+    // its size, and the directory listing — so we can compare with the Console.
     let diag = {};
     try {
-      const Database = require('better-sqlite3');
+      const fs = require('fs');
       const dbPath = process.env.DB_PATH || 'default';
-      const fresh = new Database(dbPath, { readonly: true });
-      const freshCount = fresh.prepare('SELECT COUNT(*) c FROM clients').get().c;
-      fresh.close();
-      diag = { cachedCount: clients.length, freshCount: freshCount, dbPath: dbPath };
+      const dir = require('path').dirname(dbPath);
+      const listing = fs.readdirSync(dir).map(function (f) {
+        try { const st = fs.statSync(require('path').join(dir, f)); return f + ' (' + st.size + 'b)'; }
+        catch (e) { return f + ' (?)'; }
+      });
+      const dbSize = fs.existsSync(dbPath) ? fs.statSync(dbPath).size : 'MISSING';
+      diag = { dbPath: dbPath, dbSize: dbSize, dirListing: listing, cachedCount: clients.length };
     } catch (e) {
       diag = { diagError: e.message };
     }
