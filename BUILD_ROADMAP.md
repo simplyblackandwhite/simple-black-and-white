@@ -273,6 +273,41 @@ Key guardrails for all copy on the site:
 
 ---
 
+## 🚀 DEPLOYED — Live on Railway (Sept 2, 2026)
+
+**Live URL:** https://simple-black-and-white-production.up.railway.app
+
+**Deployment notes:**
+- Node pinned to 20.x (better-sqlite3 native build failed on Node 24)
+- Persistent volume mounted at `/data` (SQLite survives redeploys)
+- `trust proxy` enabled in production (fixed OAuth session cookie not persisting behind Railway HTTPS)
+- All env vars set in Railway dashboard; Google OAuth callback + JS origins updated for production URL
+- Verified live: homepage, light scan (Puppeteer works on Railway), snapshot/outreach emails, login, favicon
+
+**Post-launch punch list:**
+- [x] **BUG (fixed Sept 6–8):** Data not displaying after scans. Causes: SQLite WAL mode on the Railway volume, and the volume attached to the wrong project. Now uses DELETE journal mode, sessions in their own `sessions.db`, and the volume is on the right project.
+- [ ] **Deliverability:** Emails landing in spam/promotions — improve DMARC/sending reputation (new domain, expected initially)
+- [x] Rotated the exposed GitHub token (Nov 18, 2026): both old tokens deleted, token removed from the git remote URL. Next `git push` needs `gh auth login` or a new fine-grained token.
+- [ ] Full UAT pass of the live dashboard
+
+**Status log:**
+- Nov 18, 2026: Railway trial expired and the site returned a 404 from Railway's fallback. Upgraded to Hobby ($5/mo), redeployed, and the site is live again (200). The volume held no client data, so nothing was lost.
+- Reminder for a lost chat: check `git log` and this file first. Phases 12 and 13 have code in the repo (`fixer-engine.js`, `comparison-engine.js`, `fixer.html`, `comparison-report.html`) but their checkboxes below are not updated. Phases 15 and 16 look unstarted.
+
+**DOMAIN — ✅ LIVE (Sept 3, 2026):**
+- `www.simplyblackandwhite.com` → Railway (www CNAME → 5pdh1e3h.up.railway.app) — WORKING (200)
+- `simplyblackandwhite.com` (root) → GoDaddy 301 forward → `https://www.simplyblackandwhite.com` — WORKING
+- Google OAuth authorized for www domain (JS origin + redirect URI added)
+- Both domains verified live: homepage, all pages, scanner (302 gate), light scan (Puppeteer), forwarding
+
+**ROOT CAUSE of the launch-night 500 errors (resolved):**
+- The env vars set on launch night were NEVER actually saved to Railway (they showed only as unsaved "Suggested Variables"). App was running with no real config.
+- With NODE_ENV not = production, the `trust proxy` guard never activated → session middleware + proxy handling threw 500 on the custom domain.
+- FIX: re-entered all env vars via Railway Raw Editor (NODE_ENV=production, real SESSION_SECRET, OAuth keys, RESEND key, www callback/APP_URL), hit Deploy. Everything resolved immediately.
+- Also shipped (may or may not have been needed, but good hardening): trust proxy in production + rate-limiter proxy validation disabled.
+
+---
+
 ### Phase 11 — Lead Capture & Email Automation (Resend)
 
 *Strategy: give value first, capture email second. Never gate the initial scan.*
